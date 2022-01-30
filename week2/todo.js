@@ -37,31 +37,10 @@ function getTasksGroup(status) {
   let group = status + ":\n";
   for (let task in list) {
     if (list[task] === status) {
-      group += list[task] + ",\n";
+      group = group + "  " + task + ";\n";
     }
   }
   return group;
 }
 
-
-
-
-
-
-// Функция changeStatus - будет менять статус задачи
-// changeStatus("write a post", "Done");
-
-// Функция addTask - добавляет новую задачу
-addTask('have a walk');
-
-// Функция deleteTask - удаляет задачу
-deleteTask('have a walk');
-
-// Функция showList будет выводить весь список дел в виде
-Todo:
-  "create a new practice task",
-  "make a bed",
-  In Progress:
-  "write a post"
-Done:
-  -
+console.log(showList());
