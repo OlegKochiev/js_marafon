@@ -1,12 +1,10 @@
 function showVerticalMessage(string) {
-  if (string[0] === "м") {
-    console.log("М");
-  } else {
-    console.log(string[0]);
-  }
-  for (let i = 1; i < (string.length > 10 ? 10 : string.length); i++) {
-    console.log(string[i]);
+  console.log(string[0] === "м" ? "М" : string[0]);
+  for (let letter of (string.slice(1, 10))) {
+    console.log(letter);
   }
 }
 
 showVerticalMessage("Здравствуй о дивный чудный мир");
+showVerticalMessage("марафон");
+showVerticalMessage("Марафон");
