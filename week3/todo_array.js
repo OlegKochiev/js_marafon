@@ -62,10 +62,10 @@ function showList() {
 function showBy(groupValue) {
   switch (groupValue) {
     case "status":
-      getGroupedArray(STATUS, groupValue);
+      showGroupedArray(STATUS, groupValue);
       break;
     case "priority":
-      getGroupedArray(PRIORITY, groupValue);
+      showGroupedArray(PRIORITY, groupValue);
       break;
     default:
       console.log("Вы ввели неверный параметр!");
@@ -73,7 +73,7 @@ function showBy(groupValue) {
   }
 }
 
-function getGroupedArray(groupArray, groupValue) {
+function showGroupedArray(groupArray, groupValue) {
   for (let value in groupArray) {
     console.log(groupArray[value] + ':');
     let resultArray = list.filter((item) => item[groupValue] === groupArray[value]);
