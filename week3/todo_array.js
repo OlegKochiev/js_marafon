@@ -1,38 +1,37 @@
-const GROUP_VALUES = {
-  'STATUS': {
-    IN_PROGRESS: "In progress",
-    DONE: "Done",
-    TO_DO: "To do"
-  },
-  'PRIORITY': {
-    HIGH: "high",
-    LOW: "low"
-  }
+const STATUS = {
+  IN_PROGRESS: "In progress",
+  DONE: "Done",
+  TO_DO: "To do"
+}
+const PRIORITY = {
+  HIGH: "high",
+  LOW: "low"
 }
 
-const DEFAULT_STATUS = GROUP_VALUES.STATUS.TO_DO;
-const DEEFAULT_PRIORITY = GROUP_VALUES.PRIORITY.LOW;
+const DEFAULT_STATUS = STATUS.TO_DO;
+const DEEFAULT_PRIORITY = PRIORITY.LOW;
 
 const list = [{
     'name': "create a new practice task",
-    'status': GROUP_VALUES.STATUS.IN_PROGRESS,
-    'priority': GROUP_VALUES.PRIORITY.LOW
+    'status': STATUS.IN_PROGRESS,
+    'priority': PRIORITY.LOW
   },
   {
     'name': 'test',
-    'status': GROUP_VALUES.STATUS.DONE,
-    'priority': GROUP_VALUES.PRIORITY.HIGH
+    'status': STATUS.DONE,
+    'priority': PRIORITY.HIGH
   },
   {
     'name': "create asssa",
-    'status': GROUP_VALUES.STATUS.TO_DO,
-    'priority': GROUP_VALUES.PRIORITY.LOW
+    'status': STATUS.TO_DO,
+    'priority': PRIORITY.LOW
   }
 ]
 
 function changeStatus(task, status) {
   list.forEach(function (item) {
     item.name === task ? item.status = status : '';
+    break;
   })
 }
 
@@ -54,16 +53,30 @@ function deleteTask(task) {
 }
 
 function showList() {
-  let toDo = getTasksGroup(GROUP_VALUES.STATUS.TO_DO);
-  let inProgress = getTasksGroup(GROUP_VALUES.STATUS.IN_PROGRESS);
-  let done = getTasksGroup(GROUP_VALUES.STATUS.DONE);
+  let toDo = getTasksGroup(STATUS.TO_DO);
+  let inProgress = getTasksGroup(STATUS.IN_PROGRESS);
+  let done = getTasksGroup(STATUS.DONE);
   console.log(toDo + inProgress + done);
 }
 
 function showBy(groupValue) {
-  for (let priorityValue in GROUP_VALUES[groupValue.toUpperCase()]) {
-    console.log(GROUP_VALUES[groupValue.toUpperCase()][priorityValue] + ':');
-    let resultArray = list.filter((item) => item[groupValue] === GROUP_VALUES[groupValue.toUpperCase()][priorityValue]);
+  switch (groupValue) {
+    case "status":
+      getGroupedArray(STATUS, groupValue);
+      break;
+    case "priority":
+      getGroupedArray(PRIORITY, groupValue);
+      break;
+    default:
+      console.log("Вы ввели неверный параметр!");
+      break;
+  }
+}
+
+function getGroupedArray(groupArray, groupValue) {
+  for (let value in groupArray) {
+    console.log(groupArray[value] + ':');
+    let resultArray = list.filter((item) => item[groupValue] === groupArray[value]);
     console.log(resultArray);
   }
 }
