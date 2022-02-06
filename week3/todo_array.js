@@ -1,31 +1,32 @@
-const STATUS = {
-  IN_PROGRESS: "In progress",
-  DONE: "Done",
-  TO_DO: "To do"
+const GROUP_VALUES = {
+  'STATUS': {
+    IN_PROGRESS: "In progress",
+    DONE: "Done",
+    TO_DO: "To do"
+  },
+  'PRIORITY': {
+    HIGH: "high",
+    LOW: "low"
+  }
 }
 
-const PRIORITY = {
-  HIGH: "high",
-  LOW: "low"
-}
-
-const DEFAULT_STATUS = STATUS.TO_DO;
-const DEEFAULT_PRIORITY = PRIORITY.LOW;
+const DEFAULT_STATUS = GROUP_VALUES.STATUS.TO_DO;
+const DEEFAULT_PRIORITY = GROUP_VALUES.PRIORITY.LOW;
 
 const list = [{
     'name': "create a new practice task",
-    'status': STATUS.IN_PROGRESS,
-    'priority': PRIORITY.LOW
+    'status': GROUP_VALUES.STATUS.IN_PROGRESS,
+    'priority': GROUP_VALUES.PRIORITY.LOW
   },
   {
     'name': 'test',
-    'status': STATUS.DONE,
-    'priority': PRIORITY.HIGH
+    'status': GROUP_VALUES.STATUS.DONE,
+    'priority': GROUP_VALUES.PRIORITY.HIGH
   },
   {
     'name': "create asssa",
-    'status': STATUS.TO_DO,
-    'priority': PRIORITY.LOW
+    'status': GROUP_VALUES.STATUS.TO_DO,
+    'priority': GROUP_VALUES.PRIORITY.LOW
   }
 ]
 
@@ -53,25 +54,17 @@ function deleteTask(task) {
 }
 
 function showList() {
-  let toDo = getTasksGroup(STATUS.TO_DO);
-  let inProgress = getTasksGroup(STATUS.IN_PROGRESS);
-  let done = getTasksGroup(STATUS.DONE);
+  let toDo = getTasksGroup(GROUP_VALUES.STATUS.TO_DO);
+  let inProgress = getTasksGroup(GROUP_VALUES.STATUS.IN_PROGRESS);
+  let done = getTasksGroup(GROUP_VALUES.STATUS.DONE);
   console.log(toDo + inProgress + done);
 }
 
 function showBy(groupValue) {
-  if (groupValue === "priority") {
-    for (let priorityValue in PRIORITY) {
-      console.log(PRIORITY[priorityValue] + ':');
-      let resultArray = list.filter((item) => item[groupValue] === PRIORITY[priorityValue]);
-      console.log(resultArray);
-    }
-  } else {
-    for (let statusValue in STATUS) {
-      console.log(STATUS[statusValue] + ':');
-      let resultArray = list.filter((item) => item[groupValue] === STATUS[statusValue]);
-      console.log(resultArray);
-    }
+  for (let priorityValue in GROUP_VALUES[groupValue.toUpperCase()]) {
+    console.log(GROUP_VALUES[groupValue.toUpperCase()][priorityValue] + ':');
+    let resultArray = list.filter((item) => item[groupValue] === GROUP_VALUES[groupValue.toUpperCase()][priorityValue]);
+    console.log(resultArray);
   }
 }
 
@@ -84,9 +77,9 @@ function getTasksGroup(status) {
 // addTask('say hello');
 // changeStatus('test', DEFAULT_STATUS);
 
-showBy('priority')
+// showBy('priority')
 // showBy('status')
-
-// console.log();
+// let str = 'priority'
+// console.log(GROUP_VALUES[str.toUpperCase()].HIGH);
 
 // showList();
