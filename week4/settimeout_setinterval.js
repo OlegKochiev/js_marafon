@@ -97,8 +97,8 @@ function showCount() {
   } else {
     clearInterval(timerId0);
   }
-}
-let timerId0 = setTimeout(showCount, 1000)
+
+  let timerId0 = setTimeout(showCount, 1000)
 }
 printNumbers(1, 5);
 
