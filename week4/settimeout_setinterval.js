@@ -95,12 +95,9 @@ function showCount() {
     console.log(count3++);
     setTimeout(showCount, 1000);
   } else {
-    clearInterval(timerId0);
+    clearTimeout(timerId0);
   }
 
   let timerId0 = setTimeout(showCount, 1000)
 }
 printNumbers(1, 5);
-
-
-//№2
