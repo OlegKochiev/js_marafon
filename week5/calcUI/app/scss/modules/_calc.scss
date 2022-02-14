@@ -1,0 +1,115 @@
+.calc {
+  width: 364px;
+  margin: 100px auto;
+  background-color: $dark;
+
+  &__input {
+    width: 100%;
+    padding: 5px 20px 5px;
+    font-size: 96px;
+    font-weight: 300;
+    text-align: right;
+    line-height: 96px;
+    outline: transparent;
+  }
+
+  &__btn-wrapper {
+    display: grid;
+    padding: 10px 20px 25px;
+    grid-template-columns: repeat(4, 70px);
+    grid-template-rows: repeat(5, 72px);
+    grid-template-areas:
+      "cl cl del dev"
+
+      "n7 n8 n9  mult"
+
+      "n4 n5 n6  subt"
+
+      "n1 n2 n3  sum"
+
+      "n0 n0 n0  eq";
+    grid-gap: 16px;
+  }
+
+  &__btn {
+    border-radius: 24px;
+    background-color: $grey;
+
+    &--blue {
+      background-color: $blue;
+    }
+
+    &--clear {
+      grid-area: cl;
+    }
+
+    &--delete {
+      grid-area: del;
+      background-image: url('../../images/icons/del_icon.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 32px;
+    }
+
+    &--devide {
+      grid-area: dev;
+    }
+
+    &--seven {
+      grid-area: n7;
+    }
+
+    &--eight {
+      grid-area: n8;
+    }
+
+    &--nine {
+      grid-area: n9;
+    }
+
+    &--multiply {
+      grid-area: mult;
+    }
+
+    &--four {
+      grid-area: n4;
+    }
+
+    &--five {
+      grid-area: n5;
+    }
+
+    &--six {
+      grid-area: n6;
+    }
+
+    &--subtract {
+      grid-area: subt;
+    }
+
+    &--one {
+      grid-area: n1;
+    }
+
+    &--two {
+      grid-area: n2;
+    }
+
+    &--three {
+      grid-area: n3;
+    }
+
+    &--sum {
+      grid-area: sum;
+    }
+
+    &--zero {
+      grid-area: n0;
+    }
+
+    &--equal {
+      grid-area: eq;
+    }
+
+  }
+}
