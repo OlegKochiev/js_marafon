@@ -18,6 +18,7 @@
     padding: 10px 20px 25px;
     grid-template-columns: repeat(4, 70px);
     grid-template-rows: repeat(5, 72px);
+    grid-gap: 16px;
     grid-template-areas:
       "cl cl del dev"
 
@@ -28,12 +29,13 @@
       "n1 n2 n3  sum"
 
       "n0 n0 n0  eq";
-    grid-gap: 16px;
+
   }
 
   &__btn {
     border-radius: 24px;
     background-color: $grey;
+    transition: opacity 0.2s;
 
     &--blue {
       background-color: $blue;
@@ -109,6 +111,10 @@
 
     &--equal {
       grid-area: eq;
+    }
+
+    &:hover {
+      opacity: 0.6;
     }
 
   }
