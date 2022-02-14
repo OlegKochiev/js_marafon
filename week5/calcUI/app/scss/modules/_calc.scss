@@ -13,26 +13,25 @@
     outline: transparent;
   }
 
-  &__btn-wrapper {
+  &__list {
     display: grid;
     padding: 10px 20px 25px;
     grid-template-columns: repeat(4, 70px);
     grid-template-rows: repeat(5, 72px);
     grid-gap: 16px;
-    grid-template-areas:
-      "cl cl del dev"
+  }
 
-      "n7 n8 n9  mult"
+  &__item:nth-child(1) {
+    grid-column: span 2;
+  }
 
-      "n4 n5 n6  subt"
-
-      "n1 n2 n3  sum"
-
-      "n0 n0 n0  eq";
-
+  &__item:nth-child(16) {
+    grid-column: span 3;
   }
 
   &__btn {
+    width: 100%;
+    height: 100%;
     border-radius: 24px;
     background-color: $grey;
     transition: opacity 0.2s;
@@ -42,75 +41,14 @@
     }
 
     &--clear {
-      grid-area: cl;
+      background-color: $lite-grey;
     }
 
     &--delete {
-      grid-area: del;
       background-image: url('../../images/icons/del_icon.svg');
       background-repeat: no-repeat;
       background-position: center;
       background-size: 32px;
-    }
-
-    &--devide {
-      grid-area: dev;
-    }
-
-    &--seven {
-      grid-area: n7;
-    }
-
-    &--eight {
-      grid-area: n8;
-    }
-
-    &--nine {
-      grid-area: n9;
-    }
-
-    &--multiply {
-      grid-area: mult;
-    }
-
-    &--four {
-      grid-area: n4;
-    }
-
-    &--five {
-      grid-area: n5;
-    }
-
-    &--six {
-      grid-area: n6;
-    }
-
-    &--subtract {
-      grid-area: subt;
-    }
-
-    &--one {
-      grid-area: n1;
-    }
-
-    &--two {
-      grid-area: n2;
-    }
-
-    &--three {
-      grid-area: n3;
-    }
-
-    &--sum {
-      grid-area: sum;
-    }
-
-    &--zero {
-      grid-area: n0;
-    }
-
-    &--equal {
-      grid-area: eq;
     }
 
     &:hover {

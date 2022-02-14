@@ -11,46 +11,80 @@
 
 <body>
   <div class="container">
-    <div class="calc">
-      <label class="sr-only" for="calcInput">Значение:</label>
-      <input class="calc__input" id="calcInput" type="text">
-      <div class="calc__btn-wrapper">
-        <button class="calc__btn calc__btn--clear" type="button">С</button>
+    <form class="calc" action="">
+      <label class="sr-only" for="calcInput">Calculator</label>
+      <input class="calc__input" id="calcInput" type="text" placeholder="1,258.2">
+      <ul class="calc__list">
+        <li class="calc__item">
+          <button class="calc__btn calc__btn--clear" type="button">С</button>
+        </li>
 
-        <button class="calc__btn calc__btn--delete" type="button"></button>
+        <li class="calc__item">
+          <button class="calc__btn calc__btn--delete" type="button"></button>
+        </li>
 
-        <button class="calc__btn calc__btn--devide calc__btn--blue" type="button">&#247;</button>
+        <li class="calc__item">
+          <button class="calc__btn calc__btn--blue" type="button">&#247;</button>
+        </li>
 
-        <button class="calc__btn calc__btn--seven" type="button">7</button>
+        <li class="calc__item">
+          <button class="calc__btn" type="button">7</button>
+        </li>
 
-        <button class="calc__btn calc__btn--eight" type="button">8</button>
+        <li class="calc__item">
+          <button class="calc__btn" type="button">8</button>
+        </li>
 
-        <button class="calc__btn calc__btn--nine" type="button">9</button>
+        <li class="calc__item">
+          <button class="calc__btn" type="button">9</button>
+        </li>
 
-        <button class="calc__btn calc__btn--multiply calc__btn--blue" type="button">&#215;</button>
+        <li class="calc__item">
+          <button class="calc__btn calc__btn--blue" type="button">&#215;</button>
+        </li>
 
-        <button class="calc__btn calc__btn--four" type="button">4</button>
+        <li class="calc__item">
+          <button class="calc__btn" type="button">4</button>
+        </li>
 
-        <button class="calc__btn calc__btn--five" type="button">5</button>
+        <li class="calc__item">
+          <button class="calc__btn" type="button">5</button>
+        </li>
 
-        <button class="calc__btn calc__btn--six" type="button">6</button>
+        <li class="calc__item">
+          <button class="calc__btn" type="button">6</button>
+        </li>
 
-        <button class="calc__btn calc__btn--subtract calc__btn--blue" type="button">-</button>
+        <li class="calc__item">
+          <button class="calc__btn calc__btn--blue" type="button">-</button>
+        </li>
 
-        <button class="calc__btn calc__btn--one" type="button">1</button>
+        <li class="calc__item">
+          <button class="calc__btn" type="button">1</button>
+        </li>
 
-        <button class="calc__btn calc__btn--two" type="button">2</button>
+        <li class="calc__item">
+          <button class="calc__btn" type="button">2</button>
+        </li>
 
-        <button class="calc__btn calc__btn--three" type="button">3</button>
+        <li class="calc__item">
+          <button class="calc__btn" type="button">3</button>
+        </li>
 
-        <button class="calc__btn calc__btn--sum calc__btn--blue" type="button">+</button>
+        <li class="calc__item">
+          <button class="calc__btn calc__btn--blue" type="button">+</button>
+        </li>
 
-        <button class="calc__btn calc__btn--zero" type="button">0</button>
+        <li class="calc__item">
+          <button class="calc__btn calc__btn--zero" type="button">0</button>
+        </li>
 
-        <button class="calc__btn calc__btn--equal calc__btn--blue" type="button">=</button>
+        <li class="calc__item">
+          <button class="calc__btn calc__btn--blue" type="button">=</button>
+        </li>
 
-      </div>
-    </div>
+      </ul>
+    </form>
   </div>
 
 </body>
