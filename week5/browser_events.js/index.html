@@ -1,0 +1,30 @@
+<input value="Нажми меня" onclick="alert('Клик!')" type="button">
+
+<script>
+  function countRabbits() {
+    for (let i = 1; i <= 3; i++) {
+      alert("Кролик номер " + i);
+    }
+  }
+</script>
+
+<input type="button" onclick="countRabbits()" value="Считать кроликов!">
+
+<input id="elem" type="button" value="Нажми меня!">
+<script>
+  elem.onclick = function () {
+    alert('Спасибо');
+  };
+  // правильно
+  button.onclick = sayThanks;
+
+  // неправильно
+  button.onclick = sayThanks();
+
+
+  //element.addEventListener(event, handler[, options]);
+
+  //elem.addEventListener( "click" , () => alert('Спасибо!'));
+  // ....
+  //elem.removeEventListener( "click", () => alert('Спасибо!'));
+</script>
