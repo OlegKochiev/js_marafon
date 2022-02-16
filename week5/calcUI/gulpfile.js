@@ -37,6 +37,7 @@ function watching() {
 		'app/scss/**/*.scss',
 	], styles);
 	watch(['app/**/*.html']).on('change', browserSync.reload);
+	watch(['app/js/**/*.js']).on('change', browserSync.reload);
 }
 
 

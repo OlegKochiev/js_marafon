@@ -11,16 +11,16 @@
 
 <body>
   <div class="container">
-    <form class="calc" action="">
+    <form class="calc" id="calcForm" action="">
       <label class="sr-only" for="calcInput">Calculator</label>
-      <input class="calc__input" id="calcInput" type="text" placeholder="1,258.2">
+      <input class="calc__input" id="calcInput" type="text" value="0" disabled>
       <ul class="calc__list">
         <li class="calc__item">
           <button class="calc__btn calc__btn--clear" type="button">С</button>
         </li>
 
         <li class="calc__item">
-          <button class="calc__btn calc__btn--delete" type="button"></button>
+          <button class="calc__btn calc__btn--delete" type="button">backspace</button>
         </li>
 
         <li class="calc__item">
@@ -86,6 +86,8 @@
       </ul>
     </form>
   </div>
+
+  <script src="js/main.js"></script>
 
 </body>
 
