@@ -57,8 +57,10 @@ function addNumberInInput(number) {
     calcValue = number;
     calcInput.value = calcValue;
   } else if (calcValue !== '0') {
-    calcValue += number;
-    calcInput.value = calcValue;
+    if (!(mathOperations.includes(calcValue[calcValue.length - 1]) && number === '0')) {
+      calcValue += number;
+      calcInput.value = calcValue;
+    }
   }
 }
 
@@ -140,7 +142,8 @@ function calculate() {
   } while (numbersArray.length > 1)
 
   result = numbersArray[0];
-  calcInput.value = result;
+  result = result.toFixed(2);
+  calcInput.value = +result;
 
   function getNumberOperatorsArray(string) {
     for (let index = 0; index < string.length; index++) {
