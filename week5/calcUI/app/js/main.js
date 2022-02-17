@@ -103,7 +103,7 @@ function calculate() {
   let operationsArray = [];
   let expression = calcInput.value;
 
-  getNumberOperatorsArray(expression);
+  splitInputExpression(expression);
 
   if (numbersArray.length === operationsArray.length) {
     operationsArray.pop();
@@ -145,12 +145,12 @@ function calculate() {
   result = result.toFixed(2);
   calcInput.value = +result;
 
-  function getNumberOperatorsArray(string) {
-    for (let index = 0; index < string.length; index++) {
-      if (keypadOperations.includes(string[index])) {
-        numbersArray.push(string.slice(0, index));
-        operationsArray.push(string.slice(index, index + 1));
-        getNumberOperatorsArray(string.slice(index + 1, string.length));
+  function splitInputExpression(string) {
+    for (let i = 0; i < string.length; i++) {
+      if (keypadOperations.includes(string[i])) {
+        numbersArray.push(string.slice(0, i));
+        operationsArray.push(string.slice(i, i + 1));
+        splitInputExpression(string.slice(i + 1, string.length));
         return;
       }
     }
