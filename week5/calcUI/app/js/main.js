@@ -39,7 +39,7 @@ function checkBtnType(event) { // Эта функция ловит нажати�
   checkNumbersLength();
 }
 
-function addOperationInInput(operation) {
+function addOperationInInput(operation) { // Эта функция добавляет математический оператор в поле input
   let calcValue = calcInput.value;
   if (calcValue !== '0') {
     if (keypadOperations.includes(calcValue[calcValue.length - 1])) { // Проверям последний введенный символ, если это математический оператор, то заменяем его на тот, который вводим
