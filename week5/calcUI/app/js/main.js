@@ -1,34 +1,34 @@
 const calcBtns = document.getElementsByClassName('calc__btn');
 const calcInput = document.getElementById('calcInput');
 
-const mathOperations = ['+', '-', '÷', '×'];
-const keypad = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-const equal = ['='];
-const clear = ['С'];
-const backspace = ['backspace'];
+const keypadOperations = ['+', '-', '÷', '×'];
+const keypadNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+const keypadEqual = '=';
+const keypadClear = 'С';
+const keypadBackspace = 'backspace';
 
 for (btn of calcBtns) {
   btn.addEventListener('click', checkBtnType);
 }
 
-function checkBtnType(event) {
+function checkBtnType(event) { // Эта функция ловит нажатие на клавишу калькулятор и определяет тип этой клавиши => [мат. оператор/цифра/знак равно/кнопка Clear/кнопка Backspace]
 
   const btn = event.target.textContent;
 
   switch (true) {
-    case mathOperations.includes(btn):
+    case keypadOperations.includes(btn):
       addOperationInInput(btn);
       break;
-    case keypad.includes(btn):
+    case keypadNumbers.includes(btn):
       addNumberInInput(btn);
       break;
-    case equal.includes(btn):
+    case keypadEqual === btn:
       calculate();
       break;
-    case clear.includes(btn):
+    case keypadClear === btn:
       clearInput();
       break;
-    case backspace.includes(btn):
+    case keypadBackspace === btn:
       backspaceInput();
       break;
     default:
@@ -42,7 +42,7 @@ function checkBtnType(event) {
 function addOperationInInput(operation) {
   let calcValue = calcInput.value;
   if (calcValue !== '0') {
-    if (mathOperations.includes(calcValue[calcValue.length - 1])) { // Проверям последний введенный символ, если это математический оператор, то заменяем его на тот, который вводим
+    if (keypadOperations.includes(calcValue[calcValue.length - 1])) { // Проверям последний введенный символ, если это математический оператор, то заменяем его на тот, который вводим
       calcValue = calcValue.slice(0, -1) + operation; // Заменяем крайний математический оператор на нововведенный
     } else {
       calcValue += operation;
@@ -57,7 +57,7 @@ function addNumberInInput(number) {
     calcValue = number;
     calcInput.value = calcValue;
   } else if (calcValue !== '0') {
-    if (!(mathOperations.includes(calcValue[calcValue.length - 1]) && number === '0')) {
+    if (!(keypadOperations.includes(calcValue[calcValue.length - 1]) && number === '0')) {
       calcValue += number;
       calcInput.value = calcValue;
     }
@@ -147,7 +147,7 @@ function calculate() {
 
   function getNumberOperatorsArray(string) {
     for (let index = 0; index < string.length; index++) {
-      if (mathOperations.includes(string[index])) {
+      if (keypadOperations.includes(string[index])) {
         numbersArray.push(string.slice(0, index));
         operationsArray.push(string.slice(index, index + 1));
         getNumberOperatorsArray(string.slice(index + 1, string.length));
