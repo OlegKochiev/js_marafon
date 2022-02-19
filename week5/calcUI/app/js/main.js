@@ -42,35 +42,33 @@ function checkBtnType(event) { // Эта функция ловит нажати�
 function addOperationInInput(operation) { // Эта функция добавляет математический оператор в поле input
   let calcValue = calcInput.value;
   if (calcValue !== '0') {
-    if (keypadOperations.includes(calcValue[calcValue.length - 1])) { // Проверям последний введенный символ, если это математический оператор, то заменяем его на тот, который вводим
-      calcValue = calcValue.slice(0, -1) + operation; // Заменяем крайний математический оператор на нововведенный
-    } else {
-      calcValue += operation;
-    }
+    keypadOperations.includes(calcValue[calcValue.length - 1]) ? calcValue = calcValue.slice(0, -1) + operation : calcValue += operation;
     calcInput.value = calcValue; // доваляем математический оператор в выражение
   } else if (calcValue === '0' && operation === '-') {
     calcInput.value = operation;
   }
 }
 
-function addNumberInInput(number) {
+function addNumberInInput(number) { // Эта функия добавляет цифру в поле input
   let calcValue = calcInput.value;
-  if (calcValue === '0' && number !== '0') { // Делаем так, что бы в input при очистке выражения был 0, и убераем его, когда начинаем вводить в него цифры
-    calcValue = number;
-    calcInput.value = calcValue;
-  } else if (calcValue !== '0') {
-    if (!(keypadOperations.includes(calcValue[calcValue.length - 1]) && number === '0')) {
+
+  switch (true) {
+    case calcValue === '0' && number !== '0':
+      calcValue = number;
+      calcInput.value = calcValue;
+      break;
+    case !(keypadOperations.includes(calcValue[calcValue.length - 1]) && number === '0' && calcValue !== '0'):
       calcValue += number;
       calcInput.value = calcValue;
-    }
+      break;
   }
 }
 
-function clearInput() {
+function clearInput() { // Очищаем поле ввода input
   calcInput.value = '0';
 }
 
-function backspaceInput() {
+function backspaceInput() { // Удалаем последний символ из поля ввода input
   let calcValue = calcInput.value;
   if (calcValue.length > 1) { // Если удаляем последнюю цифру, то на ее место ставим 0
     calcInput.value = calcValue.slice(0, -1);
@@ -104,17 +102,13 @@ function calculate() {
   let numbersArray = [];
   let operationsArray = [];
   let expression = calcInput.value;
-
+  let result = 0;
   splitInputExpression(expression);
 
-  if (numbersArray.length === operationsArray.length) {
-    operationsArray.pop();
-  }
+  numbersArray.length === operationsArray.length ? operationsArray.pop() : '';
 
-  let result = 0;
   result = +getResult().toFixed(2);
   calcInput.value = result;
-
 
   function splitInputExpression(string) {
     for (let i = 1; i < string.length; i++) {
