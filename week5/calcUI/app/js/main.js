@@ -1,7 +1,7 @@
 const calcBtns = document.getElementsByClassName('calc__btn');
 const calcInput = document.getElementById('calcInput');
 
-const keypadOperations = ['+', '-', '÷', '×'];
+const keypadOperations = ['×', '÷', '+', '-'];
 const keypadNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 const keypadEqual = '=';
 const keypadClear = 'С';
@@ -112,40 +112,9 @@ function calculate() {
   }
 
   let result = 0;
-  do {
-    for (let i = 0; i < operationsArray.length; i++) {
-      switch (operationsArray[i]) {
-        case '×':
-          numbersArray[i] = +numbersArray[i] * +numbersArray[i + 1];
-          numbersArray.splice(i + 1, 1);
-          operationsArray.splice(i, 1);
-          break;
-        case '÷':
-          numbersArray[i] = +numbersArray[i] / +numbersArray[i + 1];
-          numbersArray.splice(i + 1, 1);
-          operationsArray.splice(i, 1);
-          break;
-      }
-    }
-    for (let i = 0; i < operationsArray.length; i++) {
-      switch (operationsArray[i]) {
-        case '+':
-          numbersArray[i] = +numbersArray[i] + +numbersArray[i + 1];
-          numbersArray.splice(i + 1, 1);
-          operationsArray.splice(i, 1);
-          break;
-        case '-':
-          numbersArray[i] = +numbersArray[i] - +numbersArray[i + 1];
-          numbersArray.splice(i + 1, 1);
-          operationsArray.splice(i, 1);
-          break;
-      }
-    }
-  } while (numbersArray.length > 1)
+  result = +getResult().toFixed(2);
+  calcInput.value = result;
 
-  result = numbersArray[0];
-  result = result.toFixed(2);
-  calcInput.value = +result;
 
   function splitInputExpression(string) {
     for (let i = 1; i < string.length; i++) {
@@ -157,5 +126,33 @@ function calculate() {
       }
     }
     string !== '' ? numbersArray.push(string) : '';
+  }
+
+  function getResult() {
+    do {
+      for (let j = 0; j < keypadOperations.length; j++) {
+        for (let i = 0; i < operationsArray.length; i++) {
+          if (keypadOperations[j] === operationsArray[i]) {
+            switch (operationsArray[i]) {
+              case '×':
+                numbersArray[i] = +numbersArray[i] * +numbersArray[i + 1];
+                break;
+              case '÷':
+                numbersArray[i] = +numbersArray[i] / +numbersArray[i + 1];
+                break;
+              case '+':
+                numbersArray[i] = +numbersArray[i] + +numbersArray[i + 1];
+                break;
+              case '-':
+                numbersArray[i] = +numbersArray[i] - +numbersArray[i + 1];
+                break;
+            }
+            numbersArray.splice(i + 1, 1);
+            operationsArray.splice(i, 1);
+          }
+        }
+      }
+    } while (numbersArray.length > 1)
+    return numbersArray[0];
   }
 }
