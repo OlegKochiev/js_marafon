@@ -48,6 +48,8 @@ function addOperationInInput(operation) { // Эта функция добавл�
       calcValue += operation;
     }
     calcInput.value = calcValue; // доваляем математический оператор в выражение
+  } else if (calcValue === '0' && operation === '-') {
+    calcInput.value = operation;
   }
 }
 
@@ -146,7 +148,7 @@ function calculate() {
   calcInput.value = +result;
 
   function splitInputExpression(string) {
-    for (let i = 0; i < string.length; i++) {
+    for (let i = 1; i < string.length; i++) {
       if (keypadOperations.includes(string[i])) {
         numbersArray.push(string.slice(0, i));
         operationsArray.push(string.slice(i, i + 1));
