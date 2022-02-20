@@ -1,34 +1,34 @@
 const calcBtns = document.getElementsByClassName('calc__btn');
 const calcInput = document.getElementById('calcInput');
 
-const mathOperations = ['+', '-', '÷', '×'];
-const keypad = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-const equal = ['='];
-const clear = ['С'];
-const backspace = ['backspace'];
+const keypadOperations = ['×', '÷', '+', '-'];
+const keypadNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+const keypadEqual = '=';
+const keypadClear = 'С';
+const keypadBackspace = 'backspace';
 
 for (btn of calcBtns) {
   btn.addEventListener('click', checkBtnType);
 }
 
-function checkBtnType(event) {
+function checkBtnType(event) { // Эта функция ловит нажатие на клавишу калькулятор и определяет тип этой клавиши => [мат. оператор/цифра/знак равно/кнопка Clear/кнопка Backspace]
 
   const btn = event.target.textContent;
 
   switch (true) {
-    case mathOperations.includes(btn):
+    case keypadOperations.includes(btn):
       addOperationInInput(btn);
       break;
-    case keypad.includes(btn):
+    case keypadNumbers.includes(btn):
       addNumberInInput(btn);
       break;
-    case equal.includes(btn):
+    case keypadEqual === btn:
       calculate();
       break;
-    case clear.includes(btn):
+    case keypadClear === btn:
       clearInput();
       break;
-    case backspace.includes(btn):
+    case keypadBackspace === btn:
       backspaceInput();
       break;
     default:
@@ -39,34 +39,36 @@ function checkBtnType(event) {
   checkNumbersLength();
 }
 
-function addOperationInInput(operation) {
+function addOperationInInput(operation) { // Эта функция добавляет математический оператор в поле input
   let calcValue = calcInput.value;
   if (calcValue !== '0') {
-    if (mathOperations.includes(calcValue[calcValue.length - 1])) { // Проверям последний введенный символ, если это математический оператор, то заменяем его на тот, который вводим
-      calcValue = calcValue.slice(0, -1) + operation; // Заменяем крайний математический оператор на нововведенный
-    } else {
-      calcValue += operation;
-    }
+    keypadOperations.includes(calcValue[calcValue.length - 1]) ? calcValue = calcValue.slice(0, -1) + operation : calcValue += operation;
     calcInput.value = calcValue; // доваляем математический оператор в выражение
+  } else if (calcValue === '0' && operation === '-') {
+    calcInput.value = operation;
   }
 }
 
-function addNumberInInput(number) {
+function addNumberInInput(number) { // Эта функия добавляет цифру в поле input
   let calcValue = calcInput.value;
-  if (calcValue === '0' && number !== '0') { // Делаем так, что бы в input при очистке выражения был 0, и убераем его, когда начинаем вводить в него цифры
-    calcValue = number;
-    calcInput.value = calcValue;
-  } else if (calcValue !== '0') {
-    calcValue += number;
-    calcInput.value = calcValue;
+
+  switch (true) {
+    case calcValue === '0' && number !== '0':
+      calcValue = number;
+      calcInput.value = calcValue;
+      break;
+    case !(keypadOperations.includes(calcValue[calcValue.length - 1]) && number === '0' && calcValue !== '0'):
+      calcValue += number;
+      calcInput.value = calcValue;
+      break;
   }
 }
 
-function clearInput() {
+function clearInput() { // Очищаем поле ввода input
   calcInput.value = '0';
 }
 
-function backspaceInput() {
+function backspaceInput() { // Удалаем последний символ из поля ввода input
   let calcValue = calcInput.value;
   if (calcValue.length > 1) { // Если удаляем последнюю цифру, то на ее место ставим 0
     calcInput.value = calcValue.slice(0, -1);
@@ -100,57 +102,51 @@ function calculate() {
   let numbersArray = [];
   let operationsArray = [];
   let expression = calcInput.value;
-
-  getNumberOperatorsArray(expression);
-
-  if (numbersArray.length === operationsArray.length) {
-    operationsArray.pop();
-  }
-
   let result = 0;
-  do {
-    for (let i = 0; i < operationsArray.length; i++) {
-      switch (operationsArray[i]) {
-        case '×':
-          numbersArray[i] = +numbersArray[i] * +numbersArray[i + 1];
-          numbersArray.splice(i + 1, 1);
-          operationsArray.splice(i, 1);
-          break;
-        case '÷':
-          numbersArray[i] = +numbersArray[i] / +numbersArray[i + 1];
-          numbersArray.splice(i + 1, 1);
-          operationsArray.splice(i, 1);
-          break;
-      }
-    }
-    for (let i = 0; i < operationsArray.length; i++) {
-      switch (operationsArray[i]) {
-        case '+':
-          numbersArray[i] = +numbersArray[i] + +numbersArray[i + 1];
-          numbersArray.splice(i + 1, 1);
-          operationsArray.splice(i, 1);
-          break;
-        case '-':
-          numbersArray[i] = +numbersArray[i] - +numbersArray[i + 1];
-          numbersArray.splice(i + 1, 1);
-          operationsArray.splice(i, 1);
-          break;
-      }
-    }
-  } while (numbersArray.length > 1)
+  splitInputExpression(expression);
 
-  result = numbersArray[0];
+  numbersArray.length === operationsArray.length ? operationsArray.pop() : '';
+
+  result = +getResult().toFixed(2);
   calcInput.value = result;
 
-  function getNumberOperatorsArray(string) {
-    for (let index = 0; index < string.length; index++) {
-      if (mathOperations.includes(string[index])) {
-        numbersArray.push(string.slice(0, index));
-        operationsArray.push(string.slice(index, index + 1));
-        getNumberOperatorsArray(string.slice(index + 1, string.length));
+  function splitInputExpression(string) {
+    for (let i = 1; i < string.length; i++) {
+      if (keypadOperations.includes(string[i])) {
+        numbersArray.push(string.slice(0, i));
+        operationsArray.push(string.slice(i, i + 1));
+        splitInputExpression(string.slice(i + 1, string.length));
         return;
       }
     }
     string !== '' ? numbersArray.push(string) : '';
+  }
+
+  function getResult() {
+    do {
+      for (let j = 0; j < keypadOperations.length; j++) {
+        for (let i = 0; i < operationsArray.length; i++) {
+          if (keypadOperations[j] === operationsArray[i]) {
+            switch (operationsArray[i]) {
+              case '×':
+                numbersArray[i] = +numbersArray[i] * +numbersArray[i + 1];
+                break;
+              case '÷':
+                numbersArray[i] = +numbersArray[i] / +numbersArray[i + 1];
+                break;
+              case '+':
+                numbersArray[i] = +numbersArray[i] + +numbersArray[i + 1];
+                break;
+              case '-':
+                numbersArray[i] = +numbersArray[i] - +numbersArray[i + 1];
+                break;
+            }
+            numbersArray.splice(i + 1, 1);
+            operationsArray.splice(i, 1);
+          }
+        }
+      }
+    } while (numbersArray.length > 1)
+    return numbersArray[0];
   }
 }
