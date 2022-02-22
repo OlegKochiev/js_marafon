@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To Do | UI</title>
+  <link rel="stylesheet" href="css/style.min.css">
+</head>
+
+<body>
+  <div class="to-do">
+    <h2 class="to-do__priority-title">
+      high
+    </h2>
+    <ul class="to-do__list" id="highPriorityList">
+      <li class="to-do__item">
+        <form class="to-do__form form" id="toDoForm" action="">
+          <label class="sr-only" for="highPriorityInput">to do</label>
+          <input class="form__input" id="highPriorityInput" type="text" placeholder="Добавить важных дел">
+          <button class="form__btn" id="highPriorityBtn" type="button"></button>
+        </form>
+      </li>
+      <li class="to-do__item">
+        <input class="to-do__task-checkbox" type="checkbox" name="checkbox">
+        <p class="to-do__task-desc"></p>
+        <button class="to-do__task-btn"></button>
+      </li>
+    </ul>
+    <h2 class="to-do__priority-title">
+      low
+    </h2>
+    <ul class="to-do__list" id="lowPriorityList">
+      <li class="to-do__item">
+        <form class="to-do__form form" id="toDoForm" action="">
+          <label class="sr-only" for="highPriorityInput">to do</label>
+          <input class="form__input" id="highPriorityInput" type="text" placeholder="Добавить важных дел">
+          <button class="form__btn" id="highPriorityBtn" type="button"></button>
+        </form>
+      </li>
+      <li class="to-do__item">
+        <input class="to-do__task-checkbox" type="checkbox" name="checkbox">
+        <p class="to-do__task-desc"></p>
+        <button class="to-do__task-btn"></button>
+      </li>
+    </ul>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/UI.js" type="module"></script>
+
+</body>
+
+</html>
