@@ -1,10 +1,3 @@
-import {
-  inputHigh,
-  btnHigh,
-  inputLow,
-  btnLow
-} from './UI'
-
 const STATUS = {
   DONE: "Done",
   TO_DO: "To do"
@@ -14,4 +7,25 @@ const PRIORITY = {
   LOW: "low"
 }
 
-const DEFAULT_STATUS = STATUS.TO_DO;
+const list = [{
+    name: "Genry",
+    priority: "LOW",
+    status: "Done"
+  },
+  {
+    name: "Harry",
+    priority: "LOW",
+    status: "Done"
+  },
+  {
+    name: "Ronald",
+    priority: "HIGH",
+    status: "To do"
+  }
+]
+
+export {
+  STATUS,
+  PRIORITY,
+  list
+}

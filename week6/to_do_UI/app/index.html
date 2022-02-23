@@ -10,45 +10,40 @@
 </head>
 
 <body>
+  <h1 class="sr-only">To do</h1>
   <div class="to-do">
-    <h2 class="to-do__priority-title">
-      high
-    </h2>
+    <form class="to-do__form-high form" action="">
+      <label class="form__title" for="inputHigh">high</label>
+      <div class="form__inner" id="highPriority">
+        <input class="form__input" id="inputHigh" type="text" placeholder="Добавить важных дел">
+        <button class="form__add-btn" id="btnHigh" type="button"></button>
+      </div>
+    </form>
     <ul class="to-do__list" id="highPriorityList">
-      <li class="to-do__item">
-        <form class="to-do__form form" id="toDoForm" action="">
-          <label class="sr-only" for="highPriorityInput">to do</label>
-          <input class="form__input" id="highPriorityInput" type="text" placeholder="Добавить важных дел">
-          <button class="form__btn" id="highPriorityBtn" type="button"></button>
-        </form>
-      </li>
-      <li class="to-do__item">
+      <!-- <li class="to-do__item" id="">
         <input class="to-do__task-checkbox" type="checkbox" name="checkbox">
         <p class="to-do__task-desc"></p>
-        <button class="to-do__task-btn"></button>
-      </li>
+        <button class="to-do__del-btn" type="button"></button>
+      </li> -->
     </ul>
-    <h2 class="to-do__priority-title">
-      low
-    </h2>
+    <form class="to-do__form-low form" action="">
+      <label class="form__title" for="inputLow">low</label>
+      <div class="form__inner" id="lowPriority">
+        <input class="form__input" id="inputLow" type="text" placeholder="Добавить важных дел">
+        <button class="form__add-btn" id="btnLow" type="button"></button>
+      </div>
+    </form>
     <ul class="to-do__list" id="lowPriorityList">
-      <li class="to-do__item">
-        <form class="to-do__form form" id="toDoForm" action="">
-          <label class="sr-only" for="highPriorityInput">to do</label>
-          <input class="form__input" id="highPriorityInput" type="text" placeholder="Добавить важных дел">
-          <button class="form__btn" id="highPriorityBtn" type="button"></button>
-        </form>
-      </li>
-      <li class="to-do__item">
+      <!-- <li class="to-do__item" id="">
         <input class="to-do__task-checkbox" type="checkbox" name="checkbox">
         <p class="to-do__task-desc"></p>
-        <button class="to-do__task-btn"></button>
-      </li>
+        <button class="to-do__del-btn" type="button"></button>
+      </li> -->
     </ul>
   </div>
 
-  <script src="js/main.js"></script>
-  <script src="js/UI.js" type="module"></script>
+  <script type="module" src="js/main.js"></script>
+  <script src="js/UI.js"></script>
 
 </body>
 

@@ -11,10 +11,51 @@
   font-size: 18px;
   background-color: $white;
 
-  &__priority-title {
-    margin-bottom: 12px;
-    text-align: center;
-    text-transform: uppercase;
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    margin-bottom: 8px;
+
+    &__title {
+      margin-bottom: 12px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    &__inner {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid $medium-gray;
+    }
+
+    &__input {
+      width: 100%;
+      padding-right: 5px;
+      outline: transparent;
+
+      &::placeholder {
+        color: $medium-gray;
+      }
+    }
+
+    &__add-btn {
+      width: 20px;
+      height: 20px;
+      background-image: url('../images/icons/add_icon.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 0.5;
+      }
+    }
   }
 
   &__list {
@@ -35,45 +76,19 @@
     }
   }
 
-  .form {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-
-    &__input {
-      width: 100%;
-      padding-right: 5px;
-      outline: transparent;
-
-      &::placeholder {
-        color: $medium-gray;
-      }
-    }
-
-    &__btn {
-      width: 20px;
-      height: 20px;
-      background-image: url('../images/icons/add_icon.svg');
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: cover;
-      transition: opacity 0.2s;
-
-      &:hover {
-        opacity: 0.5;
-      }
-    }
-  }
-
   &__task-checkbox {
     width: 19px;
     height: 19px;
     margin: 0;
   }
 
-  &__task-btn {
+  &__task-desc {
+    width: 100%;
+    padding: 0 5px;
+    text-align: left;
+  }
+
+  &__del-btn {
     width: 16px;
     height: 16px;
     background-image: url('../images/icons/close_icon.svg');
