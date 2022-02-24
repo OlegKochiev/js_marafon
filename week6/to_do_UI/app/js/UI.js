@@ -22,24 +22,26 @@ function getNewTask(event, STATUS, PRIORITY) {
 
 function getNewNode(task) {
     let li = document.createElement('li');
+    let label = document.createElement('label');
     let checkbox = document.createElement('input');
+    let span = document.createElement('span');
     let p = document.createElement('p');
     let btnDel = document.createElement('button');
 
     li.classList.add('to-do__item');
-
+    label.classList.add('to-do__checkbox-wrapper');
     checkbox.type = 'checkbox';
     checkbox.classList.add('to-do__task-checkbox');
     checkbox.addEventListener('click', changeTaskStatus, task);
-
     p.textContent = task.name;
     p.classList.add('to-do__task-desc');
-
     btnDel.type = 'button'
     btnDel.classList.add('to-do__del-btn');
     btnDel.addEventListener('click', delTask);
 
-    li.appendChild(checkbox);
+    label.appendChild(checkbox);
+    label.appendChild(span);
+    li.appendChild(label);
     li.appendChild(p);
     li.appendChild(btnDel);
 

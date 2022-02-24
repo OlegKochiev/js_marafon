@@ -76,10 +76,62 @@
     }
   }
 
-  &__task-checkbox {
+  &__checkbox-wrapper {
     width: 19px;
     height: 19px;
-    margin: 0;
+    display: block;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+
+    input {
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+      display: block;
+      width: 0;
+      height: 0;
+
+      &:checked+span {
+        &::after {
+          background-color: rgba($medium-gray, 1);
+        }
+      }
+    }
+
+    span {
+      display: inline-block;
+      position: relative;
+      padding: 0 0 0 35px;
+      line-height: 22px;
+
+      &::before {
+        content: "";
+        position: absolute;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        left: 0;
+        bottom: -4px;
+        border: 1px solid $medium-gray;
+        border-radius: 10px;
+        transition: background 0.3s ease;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        left: 3px;
+        bottom: -1px;
+        border-radius: 7px;
+        transition: background 0.3s ease;
+        background-color: rgba($medium-gray, 0);
+      }
+    }
+
   }
 
   &__task-desc {
@@ -93,6 +145,7 @@
   &__del-btn {
     width: 16px;
     height: 16px;
+    margin-top: 3px;
     background-image: url('../images/icons/close_icon.svg');
     background-repeat: no-repeat;
     background-position: center;
