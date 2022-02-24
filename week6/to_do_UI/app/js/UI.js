@@ -1,16 +1,10 @@
-const inputHigh = document.getElementById('inputHigh');
-const inputLow = document.getElementById('inputLow');
-inputHigh.addEventListener('keydown', listenerForInput);
-inputLow.addEventListener('keydown', listenerForInput);
-
-console.log('hi');
-
 function addTask(event, STATUS, PRIORITY) {
     const task = getNewTask(event, STATUS, PRIORITY);
-    const taskNode = getNewNode(task);
-    const toDoList = getToDOList(task, PRIORITY);
-
-    toDoList.prepend(taskNode);
+    if (isNotEmpty(task)) {
+        const taskNode = getNewNode(task);
+        const toDoList = getToDOList(task, PRIORITY);
+        toDoList.prepend(taskNode);
+    }
 }
 
 function getNewTask(event, STATUS, PRIORITY) {
@@ -67,15 +61,23 @@ function delTask(event) {
     toDoNode.remove();
 }
 
-function listenerForInput(event) {
+function listenerForInput(event, STATUS, PRIORITY) {
     if (event.key === "Enter") {
         event.preventDefault();
-        addTask(event);
+        addTask(event, STATUS, PRIORITY);
     }
 }
 
 function changeTaskStatus(task) {
 
+}
+
+function isNotEmpty(task) {
+    if (task.name !== '') {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 export {

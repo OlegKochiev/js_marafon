@@ -4,7 +4,6 @@ import {
   listenerForInput,
   changeTaskStatus
 } from './UI.js'
-console.log('hi');
 
 const STATUS = {
   DONE: "Done",
@@ -15,22 +14,12 @@ const PRIORITY = {
   LOW: "low"
 }
 
-const list = [{
-    name: "Genry",
-    priority: "LOW",
-    status: "Done"
-  },
-  {
-    name: "Harry",
-    priority: "LOW",
-    status: "Done"
-  },
-  {
-    name: "Ronald",
-    priority: "HIGH",
-    status: "To do"
-  }
-]
+const list = []
+
+const inputHigh = document.getElementById('inputHigh');
+const inputLow = document.getElementById('inputLow');
+inputHigh.addEventListener('keydown', (event) => listenerForInput(event, STATUS, PRIORITY));
+inputLow.addEventListener('keydown', (event) => listenerForInput(event, STATUS, PRIORITY));
 
 
 const btnHigh = document.getElementById('btnHigh');
