@@ -1,25 +1,19 @@
-import { STATUS, PRIORITY, list } from './main.js';
-
 const inputHigh = document.getElementById('inputHigh');
 const inputLow = document.getElementById('inputLow');
-const btnHigh = document.getElementById('btnHigh');
-const btnLow = document.getElementById('btnLow');
-
 inputHigh.addEventListener('keydown', listenerForInput);
 inputLow.addEventListener('keydown', listenerForInput);
 
-btnHigh.addEventListener('click', addTask);
-btnLow.addEventListener('click', addTask);
+console.log('hi');
 
-function addTask(event) {
-    const task = getNewTask(event);
+function addTask(event, STATUS, PRIORITY) {
+    const task = getNewTask(event, STATUS, PRIORITY);
     const taskNode = getNewNode(task);
-    const toDoList = getToDOList(task);
+    const toDoList = getToDOList(task, PRIORITY);
 
     toDoList.prepend(taskNode);
 }
 
-function getNewTask(event) {
+function getNewTask(event, STATUS, PRIORITY) {
     const parent = event.target.parentNode;
     const name = parent.querySelector('input').value;
     parent.querySelector('input').value = '';
@@ -58,7 +52,7 @@ function getNewNode(task) {
     return li;
 }
 
-function getToDOList(task) {
+function getToDOList(task, PRIORITY) {
     let toDoList;
     if (task.priority === PRIORITY.HIGH) {
         toDoList = document.getElementById('highPriorityList');
@@ -82,4 +76,14 @@ function listenerForInput(event) {
 
 function changeTaskStatus(task) {
 
+}
+
+export {
+    addTask,
+    getNewTask,
+    getNewNode,
+    getToDOList,
+    delTask,
+    listenerForInput,
+    changeTaskStatus
 }
