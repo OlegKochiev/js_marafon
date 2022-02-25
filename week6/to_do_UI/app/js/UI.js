@@ -32,7 +32,7 @@ function getNewTask(event) {
 	const name = parent.querySelector('input').value;
 	const status = STATUS.TO_DO;
 	const priority = parent.id === 'highPriority' ? PRIORITY.HIGH : PRIORITY.LOW;
-	const id = Math.floor(Math.random() * (1000000000 - 1)) + 1;
+	const id = list.freeID++;
 
 	parent.querySelector('input').value = '';
 
