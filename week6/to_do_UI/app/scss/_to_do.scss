@@ -77,12 +77,13 @@
   }
 
   &__checkbox-wrapper {
+    position: relative;
+    display: block;
     width: 19px;
     height: 19px;
-    display: block;
-    cursor: pointer;
+    margin-right: 8px;
     user-select: none;
-    position: relative;
+    cursor: pointer;
 
     input {
       position: absolute;

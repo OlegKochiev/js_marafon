@@ -104,9 +104,14 @@ function changeTaskStatus(event) {
 }
 
 function isNotEmpty(task) {
-	if (task.name !== '') {
-		return true;
-	} else {
-		return false;
+	try {
+		if (task.name === '') {
+			throw "Error: Введите название задачи!"
+		} else {
+			return true;
+		}
+	} catch (error) {
+		console.log(error);
 	}
+
 }
