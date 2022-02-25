@@ -1,6 +1,7 @@
 import {
 	STATUS,
-	PRIORITY
+	PRIORITY,
+	list
 } from './main.js';
 
 const inputHigh = document.getElementById('inputHigh');
@@ -22,16 +23,21 @@ function addTask(event) {
 		const taskNode = getNewNode(task);
 		const toDoList = getToDOList(task);
 		toDoList.prepend(taskNode);
+		list.addTask(task);
 	}
 }
 
 function getNewTask(event) {
 	const parent = event.target.parentNode;
 	const name = parent.querySelector('input').value;
-	parent.querySelector('input').value = '';
 	const status = STATUS.TO_DO;
 	const priority = parent.id === 'highPriority' ? PRIORITY.HIGH : PRIORITY.LOW;
+	const id = Math.floor(Math.random() * (1000000000 - 1)) + 1;
+
+	parent.querySelector('input').value = '';
+
 	return {
+		id,
 		name,
 		status,
 		priority
@@ -47,6 +53,7 @@ function getNewNode(task) {
 	let btnDel = document.createElement('button');
 
 	li.classList.add('to-do__item');
+	li.id = task.id;
 	label.classList.add('to-do__checkbox-wrapper');
 	checkbox.type = 'checkbox';
 	checkbox.classList.add('to-do__task-checkbox');
@@ -77,8 +84,10 @@ function getToDOList(task) {
 }
 
 function delTask(event) {
-	let toDoNode = event.target.parentNode;
-	toDoNode.remove();
+	let taskNode = event.target.parentNode;
+	const taskID = Number(event.target.parentNode.id);
+	taskNode.remove();
+	list.delTask(taskID)
 }
 
 function listenerForInput(event) {
@@ -88,8 +97,10 @@ function listenerForInput(event) {
 	}
 }
 
-function changeTaskStatus(task) {
-
+function changeTaskStatus(event) {
+	let taskNode = event.target.parentNode.parentNode;
+	const taskID = Number(taskNode.id);
+	list.changeTaskStatus(taskID);
 }
 
 function isNotEmpty(task) {
@@ -98,14 +109,4 @@ function isNotEmpty(task) {
 	} else {
 		return false;
 	}
-}
-
-export {
-	addTask,
-	getNewTask,
-	getNewNode,
-	getToDOList,
-	delTask,
-	listenerForInput,
-	changeTaskStatus
 }
