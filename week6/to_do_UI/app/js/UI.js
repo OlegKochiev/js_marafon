@@ -4,6 +4,8 @@ import {
 	list
 } from './main.js';
 
+const EMPTY_STRING = '';
+
 const inputHigh = document.getElementById('inputHigh');
 const inputLow = document.getElementById('inputLow');
 inputHigh.addEventListener('keydown', (event) => listenerForInput(event));
@@ -105,7 +107,7 @@ function changeTaskStatus(event) {
 
 function isNotEmpty(task) {
 	try {
-		if (task.name === '') {
+		if (task.name === EMPTY_STRING) {
 			throw "Error: Введите название задачи!"
 		} else {
 			return true;
