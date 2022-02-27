@@ -22,15 +22,15 @@ UI_ELEMENTS.BTN_ADD_HIGH.addEventListener('click', (event) => addTask(event));
 UI_ELEMENTS.BTN_ADD_LOW.addEventListener('click', (event) => addTask(event));
 
 function addTask(event) {
-	const task = createNewTask(event);
+	const task = createTask(event);
 	if (isNotEmpty(task)) {
 		list.addTask(task);
-		const taskNode = createNewNode(task);
+		const taskNode = createNode(task);
 		addItemToList(taskNode, task);
 	}
 }
 
-function createNewTask(event) {
+function createTask(event) {
 	const parent = event.target.parentNode;
 	const name = parent.querySelector('input').value;
 	const status = DEFAULT_STATUS;
@@ -47,7 +47,7 @@ function createNewTask(event) {
 	};
 }
 
-function createNewNode(task) {
+function createNode(task) {
 	let li = document.createElement('li');
 	let label = document.createElement('label');
 	let checkbox = document.createElement('input');
