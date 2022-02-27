@@ -1,42 +1,41 @@
 import {
 	STATUS,
 	PRIORITY,
-	list
+	list,
+	DEFAULT_STATUS
 } from './main.js';
 
 const EMPTY_STRING = '';
 
-const inputHigh = document.getElementById('inputHigh');
-const inputLow = document.getElementById('inputLow');
-inputHigh.addEventListener('keydown', (event) => listenerForInput(event));
-inputLow.addEventListener('keydown', (event) => listenerForInput(event));
+const UI_ELEMENTS = {
+	INPUT_HIGH: document.getElementById('inputHigh'),
+	INPUT_LOW: document.getElementById('inputLow'),
+	BTN_ADD_HIGH: document.getElementById('btnHigh'),
+	BTN_ADD_LOW: document.getElementById('btnLow')
+}
 
-
-const btnHigh = document.getElementById('btnHigh');
-const btnLow = document.getElementById('btnLow');
-
-
-btnHigh.addEventListener('click', (event) => addTask(event));
-btnLow.addEventListener('click', (event) => addTask(event));
+UI_ELEMENTS.INPUT_HIGH.addEventListener('keydown', (event) => listenerForInput(event));
+UI_ELEMENTS.INPUT_LOW.addEventListener('keydown', (event) => listenerForInput(event));
+UI_ELEMENTS.BTN_ADD_HIGH.addEventListener('click', (event) => addTask(event));
+UI_ELEMENTS.BTN_ADD_LOW.addEventListener('click', (event) => addTask(event));
 
 function addTask(event) {
-	const task = getNewTask(event);
+	const task = createNewTask(event);
 	if (isNotEmpty(task)) {
-		const taskNode = getNewNode(task);
-		const toDoList = getToDOList(task);
-		toDoList.prepend(taskNode);
 		list.addTask(task);
+		const taskNode = createNewNode(task);
+		addItemToList(taskNode, task);
 	}
 }
 
-function getNewTask(event) {
+function createNewTask(event) {
 	const parent = event.target.parentNode;
 	const name = parent.querySelector('input').value;
-	const status = STATUS.TO_DO;
+	const status = DEFAULT_STATUS;
 	const priority = parent.id === 'highPriority' ? PRIORITY.HIGH : PRIORITY.LOW;
-	const id = list.freeID++;
+	const id = list.idCounter++;
 
-	parent.querySelector('input').value = '';
+	parent.querySelector('input').value = EMPTY_STRING;
 
 	return {
 		id,
@@ -46,14 +45,13 @@ function getNewTask(event) {
 	};
 }
 
-function getNewNode(task) {
+function createNewNode(task) {
 	let li = document.createElement('li');
 	let label = document.createElement('label');
 	let checkbox = document.createElement('input');
 	let span = document.createElement('span');
 	let p = document.createElement('p');
 	let btnDel = document.createElement('button');
-
 	li.classList.add('to-do__item');
 	li.id = task.id;
 	label.classList.add('to-do__checkbox-wrapper');
@@ -65,14 +63,17 @@ function getNewNode(task) {
 	btnDel.type = 'button'
 	btnDel.classList.add('to-do__del-btn');
 	btnDel.addEventListener('click', delTask);
-
 	label.appendChild(checkbox);
 	label.appendChild(span);
 	li.appendChild(label);
 	li.appendChild(p);
 	li.appendChild(btnDel);
-
 	return li;
+}
+
+function addItemToList(taskNode, task) {
+	const toDoList = getToDOList(task);
+	toDoList.prepend(taskNode);
 }
 
 function getToDOList(task) {
@@ -88,8 +89,14 @@ function getToDOList(task) {
 function delTask(event) {
 	let taskNode = event.target.parentNode;
 	const taskID = Number(event.target.parentNode.id);
-	taskNode.remove();
-	list.delTask(taskID)
+	list.delTask(taskID); //  В первую очередь работа с данными, и только потом с представлением!! ->>>
+	taskNode.remove(); // ->>>
+}
+
+function changeTaskStatus(event) {
+	let taskNode = event.target.parentNode.parentNode;
+	const taskID = Number(taskNode.id);
+	list.changeTaskStatus(taskID);
 }
 
 function listenerForInput(event) {
@@ -97,12 +104,6 @@ function listenerForInput(event) {
 		event.preventDefault();
 		addTask(event);
 	}
-}
-
-function changeTaskStatus(event) {
-	let taskNode = event.target.parentNode.parentNode;
-	const taskID = Number(taskNode.id);
-	list.changeTaskStatus(taskID);
 }
 
 function isNotEmpty(task) {

@@ -8,10 +8,12 @@ const PRIORITY = {
   LOW: "low"
 }
 
+const DEFAULT_STATUS = STATUS.TO_DO;
+
 class List {
   constructor() {
     this.list = [];
-    this.freeID = 0;
+    this.idCounter = 0;
   }
 
   addTask(task) {
@@ -24,11 +26,11 @@ class List {
   }
 
   changeTaskStatus(taskID) {
-    let taskIndex = this.list.findIndex(task => task.id === taskID);
-    if (this.list[taskIndex].status === STATUS.DONE) {
-      this.list[taskIndex].status = STATUS.TO_DO;
+    let task = this.list.find(task => task.id === taskID);
+    if (task.status === STATUS.DONE) {
+      task.status = STATUS.TO_DO;
     } else {
-      this.list[taskIndex].status = STATUS.DONE;
+      task.status = STATUS.DONE;
     }
   }
 }
@@ -38,5 +40,6 @@ const list = new List();
 export {
   STATUS,
   PRIORITY,
+  DEFAULT_STATUS,
   list
 }
