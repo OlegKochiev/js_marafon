@@ -12,8 +12,8 @@ const UI_ELEMENTS = {
 	INPUT_LOW: document.getElementById('inputLow'),
 	BTN_ADD_HIGH: document.getElementById('btnHigh'),
 	BTN_ADD_LOW: document.getElementById('btnLow'),
-	TO_DO_LIST_WITH_HIGH_PRIORITY: document.getElementById('highPriorityList'),
-	TO_DO_LIST_WITH_LOW_PRIORITY: document.getElementById('lowPriorityList')
+	LIST_WITH_HIGH_PRIORITY: document.getElementById('highPriorityList'),
+	LIST_WITH_LOW_PRIORITY: document.getElementById('lowPriorityList')
 }
 
 UI_ELEMENTS.INPUT_HIGH.addEventListener('keydown', (event) => listenerForInput(event));
@@ -81,9 +81,9 @@ function addItemToList(taskNode, task) {
 function getToDOList(task) {
 	let toDoList;
 	if (task.priority === PRIORITY.HIGH) {
-		toDoList = UI_ELEMENTS.TO_DO_LIST_WITH_HIGH_PRIORITY;
+		toDoList = UI_ELEMENTS.LIST_WITH_HIGH_PRIORITY;
 	} else {
-		toDoList = UI_ELEMENTS.TO_DO_LIST_WITH_LOW_PRIORITY;
+		toDoList = UI_ELEMENTS.LIST_WITH_LOW_PRIORITY;
 	}
 	return toDoList;
 }
