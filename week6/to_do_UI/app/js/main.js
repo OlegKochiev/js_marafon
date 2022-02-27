@@ -21,12 +21,12 @@ class List {
   }
 
   delTask(taskID) {
-    let taskIndex = this.list.findIndex(task => task.id === taskID);
+    const taskIndex = this.list.findIndex(task => task.id === taskID);
     this.list.splice(taskIndex, 1);
   }
 
   changeTaskStatus(taskID) {
-    let task = this.list.find(task => task.id === taskID);
+    const task = this.list.find(task => task.id === taskID);
     if (task.status === STATUS.DONE) {
       task.status = STATUS.TO_DO;
     } else {
