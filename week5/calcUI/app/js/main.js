@@ -1,14 +1,11 @@
+// @ts-nocheck
 const calcInput = document.getElementById('calcInput');
 const ZERO = '0';
 const KEYPAD_EQUAL = '=';
 const KEYPAD_CLEAR = 'С';
 const KEYPAD_BACKSPACE = 'backspace';
-const KEYPAD_OPERATIONS = {
-  mult: '×',
-  del: '÷',
-  sum: '+',
-  diff: '-'
-}
+const KEYPAD_OPERATIONS = '×÷+-';
+
 
 const KEYPAD_NUMBERS = {
   0: ZERO,
@@ -36,45 +33,15 @@ document.getElementById('equalBtn').addEventListener('click', calculate);
 document.getElementById('clearBtn').addEventListener('click', clearInput);
 document.getElementById('backspaceBtn').addEventListener('click', backspaceInput);
 document.querySelectorAll('.calc__btn--number').forEach(btnNumber => {
-  btnNumber.addEventListener('click', () => addNumberInInput(this));
+  btnNumber.addEventListener('click', addNumberInInput);
 });
 document.querySelectorAll('.calc__btn--operation').forEach(btnOperation => {
-  btnOperation.addEventListener('click', () => addOperationInInput(this));
+  btnOperation.addEventListener('click', addOperationInInput);
 });
 
-
-
-
-
-function checkBtnType(event) { // Эта функция ловит нажатие на клавишу калькулятор и определяет тип этой клавиши => [мат. оператор/цифра/знак равно/кнопка Clear/кнопка Backspace]
-
-  const btn = event.target.textContent;
-
-  switch (true) {
-    case KEYPAD_OPERATIONS.includes(btn):
-      addOperationInInput(btn);
-      break;
-    case keypadNumbers.includes(btn):
-      addNumberInInput(btn);
-      break;
-    case keypadEqual === btn:
-      calculate();
-      break;
-    case keypadClear === btn:
-      clearInput();
-      break;
-    case keypadBackspace === btn:
-      backspaceInput();
-      break;
-    default:
-      console.log('Somethin is wrong!');
-      break;
-  }
-
+function addOperationInInput(event) { // Эта функция добавляет математический оператор в поле input
   checkNumbersLength();
-}
-
-function addOperationInInput(operation) { // Эта функция добавляет математический оператор в поле input
+  const operation = event.target.textContent;
   let calcValue = calcInput.value;
   if (calcValue !== ZERO) {
     KEYPAD_OPERATIONS.includes(calcValue[calcValue.length - 1]) ? calcValue = calcValue.slice(0, -1) + operation : calcValue += operation;
@@ -84,8 +51,9 @@ function addOperationInInput(operation) { // Эта функция добавл�
   }
 }
 
-function addNumberInInput(btn) { // Эта функия добавляет цифру в поле input
-  let number = btn.target.textContent;
+function addNumberInInput(event) { // Эта функия добавляет цифру в поле input
+  checkNumbersLength();
+  let number = event.target.textContent;
   let calcValue = calcInput.value;
 
   switch (true) {
@@ -93,7 +61,7 @@ function addNumberInInput(btn) { // Эта функия добавляет ци�
       calcValue = number;
       calcInput.value = calcValue;
       break;
-    case !(KEYPAD_OPERATIONS.is(calcValue[calcValue.length - 1]) && number === ZERO && calcValue !== ZERO):
+    case !(KEYPAD_OPERATIONS.includes(calcValue[calcValue.length - 1]) && number === ZERO && calcValue !== ZERO):
       calcValue += number;
       calcInput.value = calcValue;
       break;
@@ -102,6 +70,7 @@ function addNumberInInput(btn) { // Эта функия добавляет ци�
 
 function clearInput() { // Очищаем поле ввода input
   calcInput.value = ZERO;
+  checkNumbersLength();
 }
 
 function backspaceInput() { // Удалаем последний символ из поля ввода input
@@ -111,6 +80,7 @@ function backspaceInput() { // Удалаем последний символ и
   } else {
     calcInput.value = ZERO; // Здесь
   }
+  checkNumbersLength();
 }
 
 function checkNumbersLength() {
@@ -143,11 +113,10 @@ function calculate() {
   let expression = calcInput.value;
   let result = 0;
   splitInputExpression(expression);
-
   numbersArray.length === operationsArray.length ? operationsArray.pop() : '';
-
   result = +getResult().toFixed(2);
   calcInput.value = result;
+  checkNumbersLength();
 
   function splitInputExpression(string) {
     for (let i = 1; i < string.length; i++) {
