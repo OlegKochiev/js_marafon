@@ -18,3 +18,4 @@ let promise2 = new Promise(function (resolve, reject) {
 // Вывод будет: 1.
 
 // Второй вызов resolve будет проигнорирован, поскольку учитывается только первый вызов reject/resolve. Все последующие вызовы – игнорируются.
+// test
