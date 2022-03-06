@@ -10,8 +10,8 @@
   &__grid {
     display: grid;
     height: 100%;
-    grid-template-columns: repeat(6, 100px);
-    grid-template-rows: repeat(10, 43px);
+    grid-template-columns: repeat(6, 1fr2);
+    grid-template-rows: repeat(10, 1fr);
     border-top: 1px solid #2ec548;
     border-left: 1px solid #2ec548;
   }
