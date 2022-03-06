@@ -6,9 +6,35 @@
   padding: 15px 10px;
 
   &__grid {
-    border: 1px solid $black;
+    display: grid;
     height: 100%;
     grid-template-columns: repeat(6, 100px);
-    grid-template-rows: repeat(10, 43px);
+    grid-template-rows: repeat(10, 42px);
+
+  }
+
+  &__form {
+    grid-column: span 6;
+    grid-row: span 1;
+  }
+
+  &__main {
+    grid-column: span 3;
+    grid-row: span 8;
+  }
+
+  &__location-title {
+    grid-column: span 3;
+    grid-row: span 2;
+  }
+
+  &__location-list {
+    grid-column: span 3;
+    grid-row: span 7;
+  }
+
+  &__nav {
+    text-align: center;
+    line-height: 43px;
   }
 }
