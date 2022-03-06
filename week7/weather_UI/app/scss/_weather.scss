@@ -1,39 +1,35 @@
 .weather {
   max-width: 620px;
   width: 100%;
-  min-height: 460px;
-  height: 100%;
-  background-color: $white;
   margin: 20px auto;
   padding: 15px 10px;
+  background-color: $white;
 
   &__grid {
     display: grid;
-    height: 100%;
-    grid-template-columns: repeat(6, 1fr2);
+    grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(10, 1fr);
     grid-gap: 1px;
     border: 1px solid $black;
+    border-radius: 3px;
     background-color: $black;
   }
 
   &__form,
   &__main,
-  &__location-title,
+  &__title-wrapper,
   &__location-list,
   &__nav {
     background-color: $white;
   }
 
-  &__form {
+  .weather-form {
     display: flex;
     justify-content: space-between;
     align-items: stretch;
     grid-column: span 6;
     grid-row: span 1;
-  }
 
-  .weather-form {
     &__input {
       max-width: 554px;
       width: 100%;
@@ -105,19 +101,53 @@
     }
   }
 
-
-  &__location-title {
+  &__title-wrapper {
+    display: flex;
+    height: 100%;
+    padding: 10px 15px;
     grid-column: span 3;
     grid-row: span 2;
   }
 
+  &__location-title {
+    align-self: end;
+    vertical-align: bottom;
+    font-size: 24px;
+  }
+
   &__location-list {
+    padding: 10px 15px;
     grid-column: span 3;
     grid-row: span 7;
   }
 
+  &__location-item {
+    padding: 8px 0;
+    font-size: 24px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
   &__nav {
-    text-align: center;
-    line-height: 43px;
+    grid-column: span 1;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: $lite-gray;
+    }
+
+    &:focus {}
+
+    &--active,
+    &:active {
+      background-color: $black;
+      color: $white;
+
+      &:hover {
+        background-color: $black;
+      }
+    }
   }
 }
