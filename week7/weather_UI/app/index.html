@@ -5,27 +5,6 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To Do | UI</title>
-  <link rel="stylesheet" href="css/style.min.css">
-</head>
-
-<body>
-  <h1 class="sr-only">To do</h1>
-  <div class="to-do">
-
-  </div>
-
-  <script src="js/main.js" type="module"></script>
-  <script src="js/UI.js" type="module"></script>
-
-</body>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Weather | UI</title>
   <link rel="stylesheet" href="css/style.min.css">
 </head>
@@ -35,13 +14,15 @@
   <div class="weather">
     <div class="weather__grid">
       <form class="weather__form weather-form" action="">
-        <label class="sr-only" for="weatherInput"></label>
+        <label class="sr-only" for="weatherInput">weather form input</label>
+
         <input class="weather-form__input" type="text" name="weatherInput" id="weatherInput">
+
         <button class="weather-form__btn"></button>
       </form>
       <div class="weather__main weather-main">
         <div class="weather-main__temperature">
-          14 <sup>0</sup>
+          14<sup>o</sup>
         </div>
 
         <div class="weather-main__city">
@@ -51,14 +32,22 @@
         <button class="weather-main__favourite"></button>
 
       </div>
-      <div class="weather__location-title">
+      <h2 class="weather__location-title">
+        Added Locations:
+      </h2>
 
-      </div>
       <div class="weather__location-list">
 
       </div>
-      <div class="weather__nav">
 
+      <div class="weather__nav--now">
+        Now
+      </div>
+      <div class="weather__nav--details">
+        Details
+      </div>
+      <div class="weather__nav--forecast">
+        Forecast
       </div>
     </div>
   </div>
