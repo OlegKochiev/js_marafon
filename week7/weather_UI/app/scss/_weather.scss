@@ -12,8 +12,9 @@
     height: 100%;
     grid-template-columns: repeat(6, 1fr2);
     grid-template-rows: repeat(10, 1fr);
-    border-top: 1px solid #2ec548;
-    border-left: 1px solid #2ec548;
+    grid-gap: 1px;
+    border: 1px solid $black;
+    background-color: $black;
   }
 
   &__form,
@@ -21,15 +22,45 @@
   &__location-title,
   &__location-list,
   &__nav {
-    border-right: 1px solid #2ec548;
-    border-bottom: 1px solid #2ec548;
-
-
+    background-color: $white;
   }
 
   &__form {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
     grid-column: span 6;
     grid-row: span 1;
+  }
+
+  .weather-form {
+    &__input {
+      max-width: 554px;
+      width: 100%;
+      height: 100%;
+      padding-left: 15px;
+      outline: transparent;
+    }
+
+    &__btn {
+      width: 44px;
+      height: 44px;
+      background-color: $black;
+      mask-image: url('../images/icons/search.svg');
+      mask-position: center;
+      mask-repeat: no-repeat;
+      mask-size: 22px;
+      transition: background-color 0.3s;
+
+
+      &:hover {
+        background-color: $medium-gray;
+      }
+
+      &:focus {}
+
+      &:active {}
+    }
   }
 
   &__main {
