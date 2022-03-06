@@ -1,6 +1,8 @@
 .weather {
-  width: 620px;
-  height: 460px;
+  max-width: 620px;
+  width: 100%;
+  min-height: 460px;
+  height: 100%;
   background-color: $white;
   margin: 20px auto;
   padding: 15px 10px;
@@ -9,7 +11,19 @@
     display: grid;
     height: 100%;
     grid-template-columns: repeat(6, 100px);
-    grid-template-rows: repeat(10, 42px);
+    grid-template-rows: repeat(10, 43px);
+    border-top: 1px solid #2ec548;
+    border-left: 1px solid #2ec548;
+  }
+
+  &__form,
+  &__main,
+  &__location-title,
+  &__location-list,
+  &__nav {
+    border-right: 1px solid #2ec548;
+    border-bottom: 1px solid #2ec548;
+
 
   }
 
