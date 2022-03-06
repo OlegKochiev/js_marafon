@@ -47,26 +47,64 @@
       height: 44px;
       background-color: $black;
       mask-image: url('../images/icons/search.svg');
-      mask-position: center;
       mask-repeat: no-repeat;
-      mask-size: 22px;
-      transition: background-color 0.3s;
+      mask-position: center;
+      mask-size: auto;
+      transition: background-color 0.2s;
 
 
       &:hover {
         background-color: $medium-gray;
       }
-
-      &:focus {}
-
-      &:active {}
     }
   }
 
-  &__main {
+  .weather-main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 15px;
     grid-column: span 3;
     grid-row: span 8;
+    background-image: url('../images/weather_bg.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto;
+
+    &__temperature {
+      font-size: 70px;
+    }
+
+    &__city {
+      font-size: 24px;
+    }
+
+    &__favourite {
+      position: absolute;
+      width: 44px;
+      height: 44px;
+      bottom: 10px;
+      right: 10px;
+      background-color: $black;
+      mask-image: url('../images/icons/favourite.svg');
+      mask-repeat: no-repeat;
+      mask-position: center;
+      mask-size: auto;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: $magenta-lite;
+      }
+
+      &--active,
+      &:active {
+        background-color: $magenta;
+      }
+    }
   }
+
 
   &__location-title {
     grid-column: span 3;
