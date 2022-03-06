@@ -16,7 +16,7 @@
   }
 
   &__form,
-  &__main,
+  &__main-list,
   &__title-wrapper,
   &__location-list,
   &__nav {
@@ -55,15 +55,19 @@
     }
   }
 
-  .weather-main {
+  .weather__main-list {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     height: 100%;
     padding: 15px;
     grid-column: span 3;
     grid-row: span 8;
+  }
+
+  .common-info {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
     background-image: url('../images/weather_bg.png');
     background-repeat: no-repeat;
     background-position: center;
@@ -71,10 +75,6 @@
 
     &__temperature {
       font-size: 70px;
-    }
-
-    &__city {
-      font-size: 24px;
     }
 
     &__favourite {
@@ -99,7 +99,42 @@
         background-color: $magenta;
       }
     }
+
+    &--active {
+      display: flex;
+    }
   }
+
+
+  .detailed-info {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+
+    &__city {
+      margin-bottom: 25px;
+    }
+
+    &__item {
+      margin-bottom: 10px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    &--active {
+      display: block;
+    }
+
+  }
+
+
+
+
+
+
 
   &__title-wrapper {
     display: flex;
@@ -112,7 +147,6 @@
   &__location-title {
     align-self: end;
     vertical-align: bottom;
-    font-size: 24px;
   }
 
   &__location-list {
@@ -123,7 +157,6 @@
 
   &__location-item {
     padding: 8px 0;
-    font-size: 24px;
 
     &:last-child {
       margin-bottom: 0;
@@ -131,6 +164,7 @@
   }
 
   &__nav {
+    font-size: 18px;
     grid-column: span 1;
     transition: background-color 0.2s;
 

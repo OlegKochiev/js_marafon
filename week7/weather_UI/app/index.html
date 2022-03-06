@@ -20,22 +20,59 @@
 
         <button class="weather-form__btn" type="submit"></button>
       </form>
-      <div class="weather__main weather-main">
-        <div class="weather-main__temperature">
-          14°
-        </div>
+      <ul class="weather__main-list">
+        <li class="weather__main-item common-info">
+          <div class="common-info__temperature">
+            14°
+          </div>
 
-        <div class="weather-main__city">
-          Aktobe
-        </div>
+          <div class="common-info__city">
+            Aktobe
+          </div>
 
-        <button class="weather-main__favourite" type="button"></button>
+          <button class="common-info__favourite" type="button"></button>
+        </li>
 
-      </div>
+        <li class="weather__main-item detailed-info">
+          <div class="detailed-info__city">
+            Aktobe
+          </div>
+          <ul class="detailed-info__list">
+            <li class="detailed-info__item">Temperature: 14</li>
+            <li class="detailed-info__item"> Feels like: 10</li>
+            <li class="detailed-info__item">Weather: Clouds</li>
+            <li class="detailed-info__item">Sunrise: 03:21</li>
+            <li class="detailed-info__item">Sunset: 18:54</li>
+          </ul>
+        </li>
+
+        <li class="weather__main-item">
+          <div class="detailed-info__city">
+            Aktobe
+          </div>
+          <ul class="weather__main-week week-info">
+            <li class="week-info__item">
+              <div class="week-info__date">
+                <div class="week-info__day">17 may</div>
+                <div class="week-info__time">15:00</div>
+              </div>
+              <div class="week-info__weather">
+                <div class="week-info__temperature">Temperature: 13°</div>
+                <div class="week-info__feel">Feels like: 10°</div>
+
+              </div>
+            </li>
+
+          </ul>
+        </li>
+
+
+
+      </ul>
       <div class="weather__title-wrapper">
-        <h2 class="weather__location-title">
+        <span class="weather__location-title">
           Added Locations:
-        </h2>
+        </span>
       </div>
 
       <ul class="weather__location-list">
