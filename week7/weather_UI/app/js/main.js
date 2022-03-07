@@ -3,14 +3,18 @@ const UI_ELEMETS = {
   BTN_DETAILS: document.getElementById('btnDetails'),
   BTN_FORECAST: document.getElementById('btnForecast'),
   INPUT_FORM: document.getElementById('inputForm'),
-  BTN_FORM: document.getElementById('btnForm')
+  BTN_FORM: document.getElementById('btnForm'),
+  BTN_FAVOURITE: document.querySelector('.common-info__favourite')
 }
 
-UI_ELEMETS.BTN_NOW.addEventListener('click', switchBtnToActive)
-UI_ELEMETS.BTN_DETAILS.addEventListener('click', switchBtnToActive)
-UI_ELEMETS.BTN_FORECAST.addEventListener('click', switchBtnToActive)
+UI_ELEMETS.BTN_NOW.addEventListener('click', switchNavBtnToActive);
+UI_ELEMETS.BTN_DETAILS.addEventListener('click', switchNavBtnToActive);
+UI_ELEMETS.BTN_FORECAST.addEventListener('click', switchNavBtnToActive);
+UI_ELEMETS.BTN_FAVOURITE.addEventListener('click', function () {
+  this.classList.toggle('common-info__favourite--active');
+});
 
-function switchBtnToActive(event) {
+function switchNavBtnToActive(event) {
   removeActiveClasses();
   const btn = event.target;
   btn.classList.add('weather__nav-btn--active');

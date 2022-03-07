@@ -56,16 +56,15 @@
 
   &__main-list {
     position: relative;
+    padding: 15px;
+    grid-column: span 3;
+    grid-row: span 8;
     overflow: scroll;
     scrollbar-width: none;
 
     &::-webkit-scrollbar {
       width: 0;
     }
-
-    padding: 15px;
-    grid-column: span 3;
-    grid-row: span 8;
   }
 
   &__main-item {
@@ -196,6 +195,12 @@
     padding: 10px 15px;
     grid-column: span 3;
     grid-row: span 7;
+    overflow: scroll;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      width: 0;
+    }
   }
 
   &__location-item {
