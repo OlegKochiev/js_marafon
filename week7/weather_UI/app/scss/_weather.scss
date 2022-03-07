@@ -1,5 +1,5 @@
 .weather {
-  max-width: 620px;
+  max-width: 600px;
   width: 100%;
   margin: 20px auto;
   padding: 15px 10px;
@@ -8,7 +8,7 @@
   &__grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 40px);
     grid-gap: 1px;
     border: 1px solid $black;
     border-radius: 3px;
@@ -55,13 +55,25 @@
     }
   }
 
-  .weather__main-list {
+  &__main-list {
     position: relative;
-    height: 100%;
+    overflow: scroll;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+
     padding: 15px;
     grid-column: span 3;
     grid-row: span 8;
   }
+
+  &__main-item {
+    height: 345px;
+  }
+
+
 
   .common-info {
     display: none;
@@ -105,7 +117,6 @@
     }
   }
 
-
   .detailed-info {
     display: none;
     flex-direction: column;
@@ -130,8 +141,42 @@
 
   }
 
+  .week-info {
+    &__item {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 120px;
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 18px;
+      border: 1px solid $black;
+    }
 
+    &__date {
+      display: flex;
+      justify-content: space-between;
+    }
 
+    &__icon {
+      position: absolute;
+      right: 10px;
+      bottom: 38px;
+
+      &:before {
+        content: '';
+        position: absolute;
+        width: 31px;
+        height: 31px;
+        top: 20px;
+        background-image: url('../images/icons/rain_icon.svg');
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+    }
+  }
 
 
 
