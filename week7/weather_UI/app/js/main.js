@@ -34,9 +34,20 @@ UI_ELEMETS.BTN_FAVOURITE.addEventListener('click', function () {
 });
 
 
-function getWeather(city) {
+async function getWeather(city) {
   const EMPTY_STRING = '';
-  console.log(city);
+  const url = getUrl(city);
+  let response = await fetch(url);
+  if (response.ok) {
+    let json = await response.json();
+    console.log(json);
+  } else {
+    alert("Ошибка HTTP: " + response.status);
+  }
+
+  // fetch(url)
+  //   .then(response => response.json())
+  //   .then(commits => alert(commits[0].author.login));
   // if (city !== EMPTY_STRING) {
   //   console.log(city);
   //   let weather = fetch({
@@ -68,6 +79,13 @@ function switchNavBtnToActive(event) {
       TAB.TAB_FORECAST.classList.add('weather__main-item--active');
       break;
   }
+}
+
+function getUrl(city) {
+  const serverUrl = 'http://api.openweathermap.org/data/2.5/weather';
+  const apiKey = 'f660a2fb1e4bad108d6160b7f58c555f';
+  const url = `${serverUrl}?q=${city}&appid=${apiKey}`;
+  return url;
 }
 
 function removeActiveClasses() {
