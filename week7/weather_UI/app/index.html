@@ -16,86 +16,95 @@
       <form class="weather__form weather-form" action="">
         <label class="sr-only" for="weatherInput">weather form input</label>
 
-        <input class="weather-form__input" type="text" name="weatherInput" id="weatherInput" placeholder="Input city..">
+        <input class="weather-form__input" id="inputForm" type="text" name="weatherInput" id="weatherInput"
+          placeholder="Input city..">
 
         <button class="weather-form__btn" type="submit"></button>
       </form>
       <ul class="weather__main-list">
-        <li class="weather__main-item common-info">
-          <div class="common-info__temperature">
-            14°
-          </div>
+        <li class="weather__main-item weather__main-item--active">
+          <div class="common-info">
+            <div class="common-info__temperature">
+              14°
+            </div>
 
-          <div class="common-info__city">
-            Aktobe
-          </div>
+            <div class="common-info__city">
+              Aktobe
+            </div>
 
-          <button class="common-info__favourite" type="button"></button>
+            <button class="common-info__favourite" type="button"></button>
+          </div>
         </li>
 
-        <li class="weather__main-item detailed-info">
-          <div class="detailed-info__city">
-            Aktobe
+        <li class="weather__main-item ">
+          <div class="detailed-info">
+            <div class="detailed-info__city">
+              Aktobe
+            </div>
+            <ul class="detailed-info__list">
+              <li class="detailed-info__item">Temperature: 14</li>
+              <li class="detailed-info__item"> Feels like: 10</li>
+              <li class="detailed-info__item">Weather: Clouds</li>
+              <li class="detailed-info__item">Sunrise: 03:21</li>
+              <li class="detailed-info__item">Sunset: 18:54</li>
+            </ul>
           </div>
-          <ul class="detailed-info__list">
-            <li class="detailed-info__item">Temperature: 14</li>
-            <li class="detailed-info__item"> Feels like: 10</li>
-            <li class="detailed-info__item">Weather: Clouds</li>
-            <li class="detailed-info__item">Sunrise: 03:21</li>
-            <li class="detailed-info__item">Sunset: 18:54</li>
-          </ul>
+
         </li>
 
-        <li class="weather__main-item">
-          <div class="detailed-info__city">
-            Aktobe
+        <li class="weather__main-item ">
+          <div class="week-info">
+            <div class="detailed-info__city">
+              Aktobe
+            </div>
+
+            <ul class="weather__main-week ">
+              <li class="week-info__item">
+                <div class="week-info__date">
+                  <div class="week-info__day">17 may</div>
+                  <div class="week-info__time">15:00</div>
+                </div>
+                <div class="week-info__weather">
+                  <div class="week-info__temperature">Temperature: 13°</div>
+                  <div class="week-info__feel">Feels like: 10°</div>
+                </div>
+                <div class="week-info__icon">
+                  Rain
+                </div>
+              </li>
+
+              <li class="week-info__item">
+                <div class="week-info__date">
+                  <div class="week-info__day">17 may</div>
+                  <div class="week-info__time">15:00</div>
+                </div>
+                <div class="week-info__weather">
+                  <div class="week-info__temperature">Temperature: 13°</div>
+                  <div class="week-info__feel">Feels like: 10°</div>
+                </div>
+                <div class="week-info__icon">
+                  Rain
+                </div>
+              </li>
+
+              <li class="week-info__item">
+                <div class="week-info__date">
+                  <div class="week-info__day">17 may</div>
+                  <div class="week-info__time">15:00</div>
+                </div>
+                <div class="week-info__weather">
+                  <div class="week-info__temperature">Temperature: 13°</div>
+                  <div class="week-info__feel">Feels like: 10°</div>
+                </div>
+                <div class="week-info__icon">
+                  Rain
+                </div>
+              </li>
+            </ul>
           </div>
-          <ul class="weather__main-week week-info">
-            <li class="week-info__item">
-              <div class="week-info__date">
-                <div class="week-info__day">17 may</div>
-                <div class="week-info__time">15:00</div>
-              </div>
-              <div class="week-info__weather">
-                <div class="week-info__temperature">Temperature: 13°</div>
-                <div class="week-info__feel">Feels like: 10°</div>
-              </div>
-              <div class="week-info__icon">
-                Rain
-              </div>
-            </li>
-            <li class="week-info__item">
-              <div class="week-info__date">
-                <div class="week-info__day">17 may</div>
-                <div class="week-info__time">15:00</div>
-              </div>
-              <div class="week-info__weather">
-                <div class="week-info__temperature">Temperature: 13°</div>
-                <div class="week-info__feel">Feels like: 10°</div>
-              </div>
-              <div class="week-info__icon">
-                Rain
-              </div>
-            </li>
-            <li class="week-info__item">
-              <div class="week-info__date">
-                <div class="week-info__day">17 may</div>
-                <div class="week-info__time">15:00</div>
-              </div>
-              <div class="week-info__weather">
-                <div class="week-info__temperature">Temperature: 13°</div>
-                <div class="week-info__feel">Feels like: 10°</div>
-              </div>
-              <div class="week-info__icon">
-                Rain
-              </div>
-            </li>
 
-          </ul>
+
         </li>
-
-
-
       </ul>
       <div class="weather__title-wrapper">
         <span class="weather__location-title">
@@ -112,23 +121,14 @@
         <li class="weather__location-item">Nur-Sultan</li>
       </ul>
 
-      <button class="weather__nav" type="button">
-        Now
-      </button>
-      <button class="weather__nav" type="button">
-        Details
-      </button>
-      <button class="weather__nav" type="button">
-        Forecast
-      </button>
+      <button class="weather__nav-btn weather__nav-btn--active" id="btnNow" type="button">Now</button>
+      <button class="weather__nav-btn" id="btnDetails" type="button">Details</button>
+      <button class="weather__nav-btn" id="btnForecast" type="button">Forecast</button>
     </div>
   </div>
 
   <script src="js/main.js" type="module"></script>
   <script src="js/UI.js" type="module"></script>
-
 </body>
-
-</html>
 
 </html>
