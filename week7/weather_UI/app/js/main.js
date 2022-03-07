@@ -36,25 +36,21 @@ UI_ELEMETS.BTN_FAVOURITE.addEventListener('click', function () {
 
 async function getWeather(city) {
   const EMPTY_STRING = '';
-  const url = getUrl(city);
-  let response = await fetch(url);
-  if (response.ok) {
-    let json = await response.json();
-    console.log(json);
-  } else {
-    alert("Ошибка HTTP: " + response.status);
+  try {
+    const url = getUrl(city);
+    if (city !== EMPTY_STRING) {
+      let response = await fetch(url);
+      if (response.ok) {
+        let json = await response.json();
+        console.log(json);
+      } else {
+        alert("Ошибка HTTP: " + response.status);
+      }
+    }
+  } catch (error) {
+    alert(error);
   }
 
-  // fetch(url)
-  //   .then(response => response.json())
-  //   .then(commits => alert(commits[0].author.login));
-  // if (city !== EMPTY_STRING) {
-  //   console.log(city);
-  //   let weather = fetch({
-  //     url: 'http://api.openweathermap.org/data/2.5/weather',
-
-  //   })
-  // }
 }
 
 
