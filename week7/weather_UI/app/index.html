@@ -19,10 +19,10 @@
         <input class="weather-form__input" id="inputForm" type="text" name="weatherInput" id="weatherInput"
           placeholder="Input city..">
 
-        <button class="weather-form__btn" type="submit"></button>
+        <button class="weather-form__btn" id="btnForm" type="button"></button>
       </form>
       <ul class="weather__main-list">
-        <li class="weather__main-item weather__main-item--active">
+        <li class="weather__main-item weather__main-item--active ">
           <div class="common-info">
             <div class="common-info__temperature">
               14°
@@ -113,15 +113,31 @@
       </div>
 
       <ul class="weather__location-list">
-        <li class="weather__location-item">Amur</li>
-        <li class="weather__location-item">Samara</li>
-        <li class="weather__location-item">Bali</li>
-        <li class="weather__location-item">Dane</li>
-        <li class="weather__location-item">Kino</li>
-        <li class="weather__location-item">Samara</li>
-        <li class="weather__location-item">Bali</li>
-        <li class="weather__location-item">Dane</li>
-        <li class="weather__location-item">Kino</li>
+        <li class="weather__location-item">
+          <button class="weather__location-btn" type="button">
+            Amur
+          </button>
+        </li>
+        <li class="weather__location-item">
+          <button class="weather__location-btn" type="button">
+            Samara
+          </button>
+        </li>
+        <li class="weather__location-item">
+          <button class="weather__location-btn" type="button">
+            Bali
+          </button>
+        </li>
+        <li class="weather__location-item">
+          <button class="weather__location-btn" type="button">
+            Dane
+          </button>
+        </li>
+        <li class="weather__location-item">
+          <button class="weather__location-btn" type="button">
+            Kino
+          </button>
+        </li>
       </ul>
 
       <button class="weather__nav-btn weather__nav-btn--active" id="btnNow" type="button">Now</button>

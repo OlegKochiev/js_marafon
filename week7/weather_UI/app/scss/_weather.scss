@@ -176,8 +176,6 @@
     }
   }
 
-
-
   &__title-wrapper {
     display: flex;
     height: 100%;
@@ -203,12 +201,10 @@
     }
   }
 
-  &__location-item {
+  &__location-btn {
+    width: 100%;
+    text-align: left;
     padding: 8px 0;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 
   &__nav-btn {
