@@ -97,7 +97,7 @@
       height: 44px;
       bottom: 10px;
       right: 10px;
-      background-color: $black;
+      background-color: $lite-gray;
       mask-image: url('../images/icons/favourite.svg');
       mask-repeat: no-repeat;
       mask-position: center;
@@ -105,12 +105,12 @@
       transition: background-color 0.2s;
 
       &:hover {
-        background-color: $magenta-lite;
+        background-color: $medium-gray;
       }
 
       &--active,
       &:active {
-        background-color: $magenta;
+        background-color: $dark;
       }
     }
   }
