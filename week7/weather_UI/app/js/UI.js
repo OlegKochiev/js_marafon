@@ -22,10 +22,11 @@ UI_ELEMETS.BTN_SEARCH.addEventListener('click', () => {
 })
 UI_ELEMETS.BTN_FAVOURITE.addEventListener('click', function () {
   this.classList.toggle(ACTIVE_CLASS.BTN_FAVOURITE);
+  let city = this.previousSibling.previousSibling.textContent;
   if (isFavourite(this)) {
-    let city = this.previousSibling.previousSibling.textContent;
-    console.log(city);
     addCityInFavourite(city)
+  } else {
+    delCityFromFavourite(city);
   }
 });
 
@@ -103,18 +104,34 @@ function renderWeatherInfo(weather) {
   document.querySelector('.detailed-info__item--sunrise').textContent = 'Sunrise: ' + (new Date(weather.sunrise * 1000)).toUTCString().slice(-12, -3);
   document.querySelector('.detailed-info__item--sunset').textContent = 'Sunset: ' + (new Date(weather.sunset * 1000)).toUTCString().slice(-12, -3);
   document.querySelector('.common-info').style.backgroundImage = `url(http://openweathermap.org/img/wn/${weather.icon}@4x.png)`;
+  document.querySelector('.common-info__favourite').classList.remove(ACTIVE_CLASS.BTN_FAVOURITE);
 }
 
-function addCityInFavourite(city) {
+function addCityInFavourite(newCity) {
+  const citys = document.querySelectorAll('.weather__location-btn');
+  for (let city of citys) {
+    if (newCity === city.textContent) {
+      return false;
+    }
+  }
   let li = document.createElement('li');
   let btn = document.createElement('button');
   li.classList.add('weather__location-item');
   btn.classList.add('weather__location-btn');
   btn.type = 'button';
-  btn.textContent = city;
+  btn.textContent = newCity;
   btn.addEventListener('click', () => {
-    getWeather(city);
+    getWeather(newCity);
   })
   li.appendChild(btn);
   document.querySelector('.weather__location-list').appendChild(li);
+}
+
+function delCityFromFavourite(oldCity) {
+  let citys = document.querySelectorAll('.weather__location-btn');
+  for (let city of citys) {
+    if (oldCity === city.textContent) {
+      city.remove();
+    }
+  }
 }
