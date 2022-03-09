@@ -55,7 +55,7 @@ async function getWeather(city) {
 }
 
 function getUrl(city) {
-  const serverUrl = 'http://api.openweathermap.org/data/2.5/weather';
+  const serverUrl = 'https://api.openweathermap.org/data/2.5/weather';
   const apiKey = 'f660a2fb1e4bad108d6160b7f58c555f';
   const url = `${serverUrl}?q=${city}&appid=${apiKey}`;
   return url;
