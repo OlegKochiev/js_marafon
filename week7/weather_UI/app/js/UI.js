@@ -3,9 +3,6 @@ import {
   TAB,
   ACTIVE_CLASS
 } from './consts.js';
-import {
-  City
-} from './main.js';
 
 UI_ELEMETS.BTN_NOW.addEventListener('click', switchNavBtnToActive);
 UI_ELEMETS.BTN_DETAILS.addEventListener('click', switchNavBtnToActive);
@@ -14,6 +11,7 @@ UI_ELEMETS.INPUT_SEARCH.addEventListener('keydown', (event) => {
   if (event.key === "Enter") {
     event.preventDefault();
     getWeather(event.target.value);
+    event.target.value = '';
   }
 })
 UI_ELEMETS.BTN_SEARCH.addEventListener('click', () => {
@@ -44,7 +42,8 @@ async function getWeather(city) {
         weather: weatherDatas.weather[0].main,
         sunrise: weatherDatas.sys.sunrise,
         sunset: weatherDatas.sys.sunset,
-        icon: weatherDatas.weather[0].icon
+        icon: weatherDatas.weather[0].icon,
+        isFavourite: false
       }
       renderWeatherInfo(weather);
     } else {
@@ -95,6 +94,7 @@ function isNotEmpty(value) {
 }
 
 function renderWeatherInfo(weather) {
+  let citysList = document.querySelectorAll('.weather__location-btn');
   document.querySelector('.common-info__temperature').textContent = weather.temperature + '°';
   document.querySelector('.common-info__city').textContent = weather.cityName;
   document.querySelector('.detailed-info__city').textContent = weather.cityName;
@@ -105,6 +105,12 @@ function renderWeatherInfo(weather) {
   document.querySelector('.detailed-info__item--sunset').textContent = 'Sunset: ' + (new Date(weather.sunset * 1000)).toUTCString().slice(-12, -3);
   document.querySelector('.common-info').style.backgroundImage = `url(http://openweathermap.org/img/wn/${weather.icon}@4x.png)`;
   document.querySelector('.common-info__favourite').classList.remove(ACTIVE_CLASS.BTN_FAVOURITE);
+  for (let city of citysList) {
+    if (weather.cityName === city.textContent) {
+      document.querySelector('.common-info__favourite').classList.add(ACTIVE_CLASS.BTN_FAVOURITE);
+      break;
+    }
+  }
 }
 
 function addCityInFavourite(newCity) {
@@ -122,7 +128,7 @@ function addCityInFavourite(newCity) {
   btn.textContent = newCity;
   btn.addEventListener('click', () => {
     getWeather(newCity);
-  })
+  });
   li.appendChild(btn);
   document.querySelector('.weather__location-list').appendChild(li);
 }

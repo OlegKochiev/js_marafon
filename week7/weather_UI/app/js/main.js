@@ -1,11 +1,10 @@
-class City {
-  addCityInFavourite(city) {
-    console.log(city);
+class localStorage {
+  addCity(city) {
+    localStorage.setItem(city, )
   }
-  delCityFromFavourite(city) {
+
+  delCity(city) {
 
   }
-}
-export {
-  City
+
 }
