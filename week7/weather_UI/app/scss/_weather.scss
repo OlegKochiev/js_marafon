@@ -139,6 +139,10 @@
   .hour-info {
     width: 100%;
 
+    &__city {
+      margin-bottom: 15px;
+    }
+
     &__item {
       position: relative;
       display: flex;
@@ -160,19 +164,20 @@
     &__icon {
       position: absolute;
       right: 10px;
-      bottom: 38px;
+      bottom: 15px;
 
-      &:before {
-        content: '';
+      span {
         position: absolute;
-        width: 31px;
-        height: 31px;
-        top: 20px;
+        width: 40px;
+        height: 40px;
+        bottom: 20px;
+        left: 0;
         background-image: url('../images/icons/rain_icon.svg');
         background-position: center center;
         background-repeat: no-repeat;
-        background-size: contain;
+        background-size: cover;
       }
+
     }
   }
 

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {
   UI_ELEMETS,
   TAB,
@@ -5,7 +6,8 @@ import {
 } from './consts.js';
 
 import {
-  getWeatherDatas
+  getWeatherDatas,
+  getForecastDatas
 } from './main.js'
 UI_ELEMETS.BTN_NOW.addEventListener('click', switchNavBtnToActive);
 UI_ELEMETS.BTN_DETAILS.addEventListener('click', switchNavBtnToActive);
@@ -37,6 +39,78 @@ function getWeather(city) {
     .then((weather) => {
       renderWeatherInfo(weather);
     })
+  getForecastDatas(city)
+    .then((forecastWeather) => {
+      renderForecastInfo(forecastWeather)
+      console.log(forecastWeather);
+    })
+
+}
+
+function renderWeatherInfo(weather) {
+  let citysList = document.querySelectorAll('.weather__location-btn');
+  const sunriseTime = (new Date(weather.sunrise * 1000)).toLocaleTimeString().substring(0, 5);
+  const sunsetTime = (new Date(weather.sunset * 1000)).toLocaleTimeString().substring(0, 5);
+  document.querySelector('.common-info__temperature').textContent = weather.temperature + '°';
+  document.querySelector('.common-info__city').textContent = weather.city;
+  document.querySelector('.detailed-info__city').textContent = weather.city;
+  document.querySelector('.detailed-info__item--temp').textContent = 'Temperature: ' + weather.temperature + '°';
+  document.querySelector('.detailed-info__item--feels-like').textContent = 'Feels like: ' + weather.feels_like + '°';
+  document.querySelector('.detailed-info__item--weather').textContent = 'Weather: ' + weather.weather;
+  document.querySelector('.detailed-info__item--sunrise').textContent = 'Sunrise: ' + sunriseTime;
+  document.querySelector('.detailed-info__item--sunset').textContent = 'Sunset: ' + sunsetTime;
+  document.querySelector('.common-info').style.backgroundImage = `url(http://openweathermap.org/img/wn/${weather.icon}@4x.png)`;
+  document.querySelector('.common-info__favourite').classList.remove(ACTIVE_CLASS.BTN_FAVOURITE);
+  for (let cityItem of citysList) {
+    if (weather.city === cityItem.textContent) {
+      document.querySelector('.common-info__favourite').classList.add(ACTIVE_CLASS.BTN_FAVOURITE);
+      break;
+    }
+  }
+}
+
+function renderForecastInfo(forecastWeather) {
+  document.querySelector('.hour-info__city').textContent = forecastWeather.city;
+  let forecastList = document.querySelector('.weather__main-hourly');
+  forecastWeather.list.forEach(weather => {
+    const forecastItem = createForecastItem(weather);
+    forecastList.append(forecastItem);
+  });
+}
+
+function createForecastItem(weather) {
+  let li = document.createElement('li');
+  li.classList.add('hour-info__item');
+  let date = document.createElement('div');
+  date.classList.add('hour-info__date');
+  let day = document.createElement('div');
+  day.classList.add('hour-info__day');
+  let time = document.createElement('div');
+  time.classList.add('hour-info__time');
+  let weatherBlock = document.createElement('div');
+  weatherBlock.classList.add('hour-info__weather');
+  let temperature = document.createElement('div');
+  temperature.classList.add('hour-info__temperature');
+  let feelsLike = document.createElement('div');
+  feelsLike.classList.add('hour-info__feel');
+  let rainOrSun = document.createElement('div');
+  rainOrSun.classList.add('hour-info__icon');
+  let span = document.createElement('span');
+  span.style.backgroundImage = `url(http://openweathermap.org/img/wn/${weather.icon}@4x.png)`;
+  day.textContent = weather.date;
+  time.textContent = weather.time;
+  temperature.textContent = 'Temperature: ' + Math.round(weather.temperature) + '°';
+  feelsLike.textContent = 'Feels like: ' + Math.round(weather.feelsLike) + '°';
+  rainOrSun.textContent = weather.weather;
+  date.appendChild(day);
+  date.appendChild(time);
+  weatherBlock.appendChild(temperature);
+  weatherBlock.appendChild(feelsLike);
+  rainOrSun.appendChild(span);
+  li.appendChild(date);
+  li.appendChild(weatherBlock);
+  li.appendChild(rainOrSun);
+  return li;
 }
 
 function switchNavBtnToActive(event) {
@@ -66,26 +140,6 @@ function isFavourite(btnFavourite) {
     return true
   } else {
     return false;
-  }
-}
-
-function renderWeatherInfo(weather) {
-  let citysList = document.querySelectorAll('.weather__location-btn');
-  document.querySelector('.common-info__temperature').textContent = weather.temperature + '°';
-  document.querySelector('.common-info__city').textContent = weather.cityName;
-  document.querySelector('.detailed-info__city').textContent = weather.cityName;
-  document.querySelector('.detailed-info__item--temp').textContent = 'Temperature: ' + weather.temperature + '°';
-  document.querySelector('.detailed-info__item--feels-like').textContent = 'Feels like: ' + weather.feels_like + '°';
-  document.querySelector('.detailed-info__item--weather').textContent = 'Weather: ' + weather.weather;
-  document.querySelector('.detailed-info__item--sunrise').textContent = 'Sunrise: ' + (new Date(weather.sunrise * 1000)).toUTCString().slice(-12, -3);
-  document.querySelector('.detailed-info__item--sunset').textContent = 'Sunset: ' + (new Date(weather.sunset * 1000)).toUTCString().slice(-12, -3);
-  document.querySelector('.common-info').style.backgroundImage = `url(http://openweathermap.org/img/wn/${weather.icon}@4x.png)`;
-  document.querySelector('.common-info__favourite').classList.remove(ACTIVE_CLASS.BTN_FAVOURITE);
-  for (let city of citysList) {
-    if (weather.cityName === city.textContent) {
-      document.querySelector('.common-info__favourite').classList.add(ACTIVE_CLASS.BTN_FAVOURITE);
-      break;
-    }
   }
 }
 
