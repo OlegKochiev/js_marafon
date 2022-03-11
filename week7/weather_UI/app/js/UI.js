@@ -42,7 +42,6 @@ function getWeather(city) {
   getForecastDatas(city)
     .then((forecastWeather) => {
       renderForecastInfo(forecastWeather)
-      console.log(forecastWeather);
     })
 
 }
@@ -71,6 +70,7 @@ function renderWeatherInfo(weather) {
 
 function renderForecastInfo(forecastWeather) {
   document.querySelector('.hour-info__city').textContent = forecastWeather.city;
+  document.querySelector('.weather__main-hourly').innerHTML = '';
   let forecastList = document.querySelector('.weather__main-hourly');
   forecastWeather.list.forEach(weather => {
     const forecastItem = createForecastItem(weather);
