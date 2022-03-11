@@ -4,6 +4,9 @@ import {
   ACTIVE_CLASS
 } from './consts.js';
 
+import {
+  getWeatherDatas
+} from './main.js'
 UI_ELEMETS.BTN_NOW.addEventListener('click', switchNavBtnToActive);
 UI_ELEMETS.BTN_DETAILS.addEventListener('click', switchNavBtnToActive);
 UI_ELEMETS.BTN_FORECAST.addEventListener('click', switchNavBtnToActive);
@@ -22,41 +25,18 @@ UI_ELEMETS.BTN_FAVOURITE.addEventListener('click', function () {
   this.classList.toggle(ACTIVE_CLASS.BTN_FAVOURITE);
   let city = this.previousSibling.previousSibling.textContent;
   if (isFavourite(this)) {
-    addCityInFavourite(city)
+    addCityToLocations(city)
   } else {
-    delCityFromFavourite(city);
+    delCityFromLocations(city);
   }
 });
 
 
-async function getWeather(city) {
-  if (isNotEmpty(city)) {
-    const url = getUrl(city);
-    let response = await fetch(url);
-    if (response.ok) {
-      let weatherDatas = await response.json();
-      const weather = {
-        cityName: weatherDatas.name,
-        temperature: Math.round(weatherDatas.main.temp - 273),
-        feels_like: Math.round(weatherDatas.main.feels_like - 273),
-        weather: weatherDatas.weather[0].main,
-        sunrise: weatherDatas.sys.sunrise,
-        sunset: weatherDatas.sys.sunset,
-        icon: weatherDatas.weather[0].icon,
-        isFavourite: false
-      }
+function getWeather(city) {
+  getWeatherDatas(city)
+    .then((weather) => {
       renderWeatherInfo(weather);
-    } else {
-      alert("Ошибка HTTP: " + response.status);
-    }
-  }
-}
-
-function getUrl(city) {
-  const serverUrl = 'https://api.openweathermap.org/data/2.5/weather';
-  const apiKey = 'f660a2fb1e4bad108d6160b7f58c555f';
-  const url = `${serverUrl}?q=${city}&appid=${apiKey}`;
-  return url;
+    })
 }
 
 function switchNavBtnToActive(event) {
@@ -89,10 +69,6 @@ function isFavourite(btnFavourite) {
   }
 }
 
-function isNotEmpty(value) {
-  return value !== '' ? true : false;
-}
-
 function renderWeatherInfo(weather) {
   let citysList = document.querySelectorAll('.weather__location-btn');
   document.querySelector('.common-info__temperature').textContent = weather.temperature + '°';
@@ -113,31 +89,35 @@ function renderWeatherInfo(weather) {
   }
 }
 
-function addCityInFavourite(newCity) {
-  const citys = document.querySelectorAll('.weather__location-btn');
-  for (let city of citys) {
-    if (newCity === city.textContent) {
+function addCityToLocations(city) {
+  const citysList = document.querySelectorAll('.weather__location-btn');
+  for (let cityItem of citysList) {
+    if (city === cityItem.textContent) {
       return false;
     }
   }
+  addCityItem(city);
+}
+
+function addCityItem(city) {
   let li = document.createElement('li');
   let btn = document.createElement('button');
   li.classList.add('weather__location-item');
   btn.classList.add('weather__location-btn');
   btn.type = 'button';
-  btn.textContent = newCity;
+  btn.textContent = city;
   btn.addEventListener('click', () => {
-    getWeather(newCity);
+    getWeather(city);
   });
   li.appendChild(btn);
   document.querySelector('.weather__location-list').appendChild(li);
 }
 
-function delCityFromFavourite(oldCity) {
-  let citys = document.querySelectorAll('.weather__location-btn');
-  for (let city of citys) {
-    if (oldCity === city.textContent) {
-      city.remove();
+function delCityFromLocations(city) {
+  let citysList = document.querySelectorAll('.weather__location-btn');
+  for (let cityItem of citysList) {
+    if (city === cityItem.textContent) {
+      cityItem.remove();
     }
   }
 }
