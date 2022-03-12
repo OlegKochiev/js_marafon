@@ -113,24 +113,24 @@ function createForecastItem(weather) {
 
 function switchNavBtnToActive(event) {
   removeActiveClasses();
-  const btn = event.target;
-  btn.classList.add('weather__nav-btn--active');
-  switch (btn.textContent) {
+  const btnNav = event.target;
+  btnNav.classList.add(ACTIVE_CLASS.BTN_NAV);
+  switch (btnNav.textContent) {
     case TAB.BNT_NOW:
-      TAB.TAB_NOW.classList.add('weather__main-item--active');
+      TAB.TAB_NOW.classList.add(ACTIVE_CLASS.ITEM_TAB);
       break;
     case TAB.BNT_DETAILS:
-      TAB.TAB_DETAILS.classList.add('weather__main-item--active');
+      TAB.TAB_DETAILS.classList.add(ACTIVE_CLASS.ITEM_TAB);
       break;
     case TAB.BNT_FORECAST:
-      TAB.TAB_FORECAST.classList.add('weather__main-item--active');
+      TAB.TAB_FORECAST.classList.add(ACTIVE_CLASS.ITEM_TAB);
       break;
   }
 }
 
 function removeActiveClasses() {
-  document.querySelector('.weather__nav-btn--active').classList.remove('weather__nav-btn--active');
-  document.querySelector('.weather__main-item--active').classList.remove('weather__main-item--active');
+  document.querySelector('.' + ACTIVE_CLASS.BTN_NAV).classList.remove(ACTIVE_CLASS.BTN_NAV);
+  document.querySelector('.' + ACTIVE_CLASS.ITEM_TAB).classList.remove(ACTIVE_CLASS.ITEM_TAB);
 }
 
 function isFavourite(btnFavourite) {

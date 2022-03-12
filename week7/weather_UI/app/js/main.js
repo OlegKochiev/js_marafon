@@ -24,7 +24,6 @@ function getWeatherDatas(city) {
         isFavourite: false
       }
     })
-    .catch(alert)
 }
 
 function getWeatherUrl(city) {
@@ -49,7 +48,6 @@ function getForecastDatas(city) {
         list: hoursList
       }
     })
-    .catch(alert)
 }
 
 function getForecastHourly(forecastDatas) {
