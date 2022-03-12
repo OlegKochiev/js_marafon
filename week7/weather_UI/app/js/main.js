@@ -4,7 +4,7 @@ import {
 
 const serverWeatherUrl = 'https://api.openweathermap.org/data/2.5/weather';
 const serverForecastUrl = 'https://api.openweathermap.org/data/2.5/forecast';
-const apiKey = 'f660a2fb1e4bad108d6160b7f58c555f';
+const apiKey = '1041b355b3b6422eb66d9f5e517f7b52';
 
 function doWeatherRequest(city, requestType) {
   const url = getUrl(city, requestType);
