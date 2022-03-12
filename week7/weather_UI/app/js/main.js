@@ -1,53 +1,54 @@
+import {
+  REQUEST
+} from './consts.js'
+
 const serverWeatherUrl = 'https://api.openweathermap.org/data/2.5/weather';
 const serverForecastUrl = 'https://api.openweathermap.org/data/2.5/forecast';
 const apiKey = 'f660a2fb1e4bad108d6160b7f58c555f';
 
-function getWeatherDatas(city) {
-  const url = getWeatherUrl(city);
+function doWeatherRequest(city, requestType) {
+  const url = getUrl(city, requestType);
   return fetch(url)
     .then(response => {
       if (response.ok) {
         return response.json()
       } else {
-        throw new Error("Неверный город!");
+        throw new Error("Укажите верное название города!");
       }
     })
     .then((weatherDatas) => {
-      return {
-        city: weatherDatas.name,
-        temperature: Math.round(weatherDatas.main.temp - 273),
-        feels_like: Math.round(weatherDatas.main.feels_like - 273),
-        weather: weatherDatas.weather[0].main,
-        sunrise: weatherDatas.sys.sunrise,
-        sunset: weatherDatas.sys.sunset,
-        icon: weatherDatas.weather[0].icon,
-        isFavourite: false
+      switch (requestType) {
+        case REQUEST.WEATHER:
+          return {
+            city: weatherDatas.name,
+              temperature: Math.round(weatherDatas.main.temp - 273),
+              feels_like: Math.round(weatherDatas.main.feels_like - 273),
+              weather: weatherDatas.weather[0].main,
+              sunrise: weatherDatas.sys.sunrise,
+              sunset: weatherDatas.sys.sunset,
+              icon: weatherDatas.weather[0].icon,
+              isFavourite: false
+          };
+        case REQUEST.FORECAST:
+          return {
+            city: weatherDatas.city.name,
+              list: getForecastHourly(weatherDatas)
+          }
       }
     })
 }
 
-function getWeatherUrl(city) {
-  const url = `${serverWeatherUrl}?q=${city}&appid=${apiKey}`;
+function getUrl(city, requestType) {
+  let url;
+  switch (requestType) {
+    case REQUEST.WEATHER:
+      url = `${serverWeatherUrl}?q=${city}&appid=${apiKey}`;
+      break;
+    case REQUEST.FORECAST:
+      url = `${serverForecastUrl}?q=${city}&appid=${apiKey}&units=metric&cnt=5`;
+      break;
+  }
   return url;
-}
-
-function getForecastDatas(city) {
-  const url = getForecastUrl(city);
-  return fetch(url)
-    .then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error("Неверный город!");
-      }
-    })
-    .then((forecastDatas) => {
-      const hoursList = getForecastHourly(forecastDatas);
-      return {
-        city: forecastDatas.city.name,
-        list: hoursList
-      }
-    })
 }
 
 function getForecastHourly(forecastDatas) {
@@ -64,12 +65,6 @@ function getForecastHourly(forecastDatas) {
   return forecastHours;
 }
 
-function getForecastUrl(city) {
-  const url = `${serverForecastUrl}?q=${city}&appid=${apiKey}&units=metric&cnt=5`;
-  return url;
-}
-
 export {
-  getWeatherDatas,
-  getForecastDatas
+  doWeatherRequest
 }

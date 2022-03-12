@@ -2,12 +2,12 @@
 import {
   UI_ELEMETS,
   TAB,
-  ACTIVE_CLASS
+  ACTIVE_CLASS,
+  REQUEST
 } from './consts.js';
 
 import {
-  getWeatherDatas,
-  getForecastDatas
+  doWeatherRequest
 } from './main.js'
 UI_ELEMETS.BTN_NOW.addEventListener('click', switchNavBtnToActive);
 UI_ELEMETS.BTN_DETAILS.addEventListener('click', switchNavBtnToActive);
@@ -36,8 +36,8 @@ UI_ELEMETS.BTN_FAVOURITE.addEventListener('click', function () {
 
 function getWeather(city) {
   Promise.all([
-    getWeatherDatas(city),
-    getForecastDatas(city)
+    doWeatherRequest(city, REQUEST.WEATHER),
+    doWeatherRequest(city, REQUEST.FORECAST)
   ]).then(response => {
     renderWeatherInfo(response[0]);
     renderForecastInfo(response[1]);
