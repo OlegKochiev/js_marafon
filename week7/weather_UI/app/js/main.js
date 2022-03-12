@@ -5,7 +5,13 @@ const apiKey = 'f660a2fb1e4bad108d6160b7f58c555f';
 function getWeatherDatas(city) {
   const url = getWeatherUrl(city);
   return fetch(url)
-    .then(response => response.json())
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw new Error("Неверный город!");
+      }
+    })
     .then((weatherDatas) => {
       return {
         city: weatherDatas.name,
@@ -20,9 +26,7 @@ function getWeatherDatas(city) {
         isFavourite: false
       }
     })
-    .catch(error => {
-      alert('Введите верное название города!');
-    })
+    .catch(alert)
 }
 
 function getWeatherUrl(city) {
@@ -33,20 +37,24 @@ function getWeatherUrl(city) {
 function getForecastDatas(city) {
   const url = getForecastUrl(city);
   return fetch(url)
-    .then(response => response.json())
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw new Error("Неверный город!");
+      }
+    })
     .then((forecastDatas) => {
-      const hoursList = getForecastHours(forecastDatas);
+      const hoursList = getForecastHourly(forecastDatas);
       return {
         city: forecastDatas.city.name,
         list: hoursList
       }
     })
-    .catch(error => {
-      alert(error);
-    })
+    .catch(alert)
 }
 
-function getForecastHours(forecastDatas) {
+function getForecastHourly(forecastDatas) {
   let forecastHours = forecastDatas.list.map((item) => {
     return {
       date: (new Date(item.dt * 1000)).toString().substring(4, 11),
