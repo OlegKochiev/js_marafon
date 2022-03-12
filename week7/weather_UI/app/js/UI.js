@@ -35,15 +35,13 @@ UI_ELEMETS.BTN_FAVOURITE.addEventListener('click', function () {
 
 
 function getWeather(city) {
-  getWeatherDatas(city)
-    .then((weather) => {
-      renderWeatherInfo(weather);
-    })
-  getForecastDatas(city)
-    .then((forecastWeather) => {
-      renderForecastInfo(forecastWeather)
-    })
-
+  Promise.all([
+    getWeatherDatas(city),
+    getForecastDatas(city)
+  ]).then(response => {
+    renderWeatherInfo(response[0]);
+    renderForecastInfo(response[1]);
+  }).catch(alert)
 }
 
 function renderWeatherInfo(weather) {

@@ -21,8 +21,6 @@ function getWeatherDatas(city) {
         sunrise: weatherDatas.sys.sunrise,
         sunset: weatherDatas.sys.sunset,
         icon: weatherDatas.weather[0].icon,
-        lat: weatherDatas.coord.lat,
-        lon: weatherDatas.coord.lon,
         isFavourite: false
       }
     })
