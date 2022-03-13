@@ -17,7 +17,7 @@ const TAB = {
 }
 
 const ACTIVE_CLASS = {
-  BTN_FAVOURITE: '.common-info__favourite--active',
+  BTN_FAVOURITE: 'common-info__favourite--active',
   BTN_NAV: 'weather__nav-btn--active',
   ITEM_TAB: 'weather__main-item--active'
 }

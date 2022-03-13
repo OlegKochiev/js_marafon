@@ -24,8 +24,8 @@ UI_ELEMETS.BTN_SEARCH.addEventListener('click', () => {
   getWeather(city);
 })
 UI_ELEMETS.BTN_FAVOURITE.addEventListener('click', function () {
-  this.classList.toggle(ACTIVE_CLASS.BTN_FAVOURITE);
   let city = this.previousSibling.previousSibling.textContent;
+  this.classList.toggle(ACTIVE_CLASS.BTN_FAVOURITE);
   if (isFavourite(this)) {
     addCityToLocations(city)
   } else {
@@ -134,11 +134,7 @@ function removeActiveClasses() {
 }
 
 function isFavourite(btnFavourite) {
-  if (btnFavourite.classList.contains(ACTIVE_CLASS.BTN_FAVOURITE)) {
-    return true
-  } else {
-    return false;
-  }
+  return btnFavourite.classList.contains(ACTIVE_CLASS.BTN_FAVOURITE) ? true : false;
 }
 
 function addCityToLocations(city) {
