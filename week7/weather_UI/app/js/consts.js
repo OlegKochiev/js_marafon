@@ -27,9 +27,16 @@ const REQUEST = {
   FORECAST: 'FORECAST'
 }
 
+const URLS = {
+  WEATHER: 'https://api.openweathermap.org/data/2.5/weather',
+  FORECAST: 'https://api.openweathermap.org/data/2.5/forecast',
+  WEATHER_ICON: 'http://openweathermap.org/img/wn/'
+}
+
 export {
   UI_ELEMETS,
   TAB,
   ACTIVE_CLASS,
-  REQUEST
+  REQUEST,
+  URLS
 }

@@ -1,9 +1,8 @@
 import {
-  REQUEST
+  REQUEST,
+  URLS
 } from './consts.js'
 
-const serverWeatherUrl = 'https://api.openweathermap.org/data/2.5/weather';
-const serverForecastUrl = 'https://api.openweathermap.org/data/2.5/forecast';
 const forecastsCount = 5;
 const apiKey = '1041b355b3b6422eb66d9f5e517f7b52';
 
@@ -43,10 +42,10 @@ function getUrl(city, requestType) {
   let url;
   switch (requestType) {
     case REQUEST.WEATHER:
-      url = `${serverWeatherUrl}?q=${city}&appid=${apiKey}`;
+      url = `${URLS.WEATHER}?q=${city}&appid=${apiKey}`;
       break;
     case REQUEST.FORECAST:
-      url = `${serverForecastUrl}?q=${city}&appid=${apiKey}&units=metric&cnt=5`;
+      url = `${URLS.FORECAST}?q=${city}&appid=${apiKey}&units=metric&cnt=${forecastsCount}`;
       break;
   }
   return url;

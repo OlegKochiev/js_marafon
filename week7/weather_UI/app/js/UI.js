@@ -3,7 +3,8 @@ import {
   UI_ELEMETS,
   TAB,
   ACTIVE_CLASS,
-  REQUEST
+  REQUEST,
+  URLS
 } from './consts.js';
 
 import {
@@ -56,7 +57,7 @@ function renderWeatherInfo(weather) {
   document.querySelector('.detailed-info__item--weather').textContent = 'Weather: ' + weather.weather;
   document.querySelector('.detailed-info__item--sunrise').textContent = 'Sunrise: ' + sunriseTime;
   document.querySelector('.detailed-info__item--sunset').textContent = 'Sunset: ' + sunsetTime;
-  document.querySelector('.common-info').style.backgroundImage = `url(http://openweathermap.org/img/wn/${weather.icon}@4x.png)`;
+  document.querySelector('.common-info').style.backgroundImage = 'url(' + URLS.WEATHER_ICON + `${weather.icon}@4x.png)`;
   document.querySelector('.common-info__favourite').classList.remove(ACTIVE_CLASS.BTN_FAVOURITE);
   for (let cityItem of citysList) {
     if (weather.city === cityItem.textContent) {
@@ -94,7 +95,7 @@ function createForecastItem(weather) {
   let rainOrSun = document.createElement('div');
   rainOrSun.classList.add('hour-info__icon');
   let span = document.createElement('span');
-  span.style.backgroundImage = `url(http://openweathermap.org/img/wn/${weather.icon}@4x.png)`;
+  span.style.backgroundImage = 'url(' + URLS.WEATHER_ICON + `${weather.icon}@4x.png)`;
   day.textContent = weather.date;
   time.textContent = weather.time;
   temperature.textContent = 'Temperature: ' + Math.round(weather.temperature) + '°';
