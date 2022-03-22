@@ -123,7 +123,9 @@ const render = {
     citys.forEach((city) => {
       render.createCityItem(city, getWeather);
     });
-    getWeather(currentCity);
+    if (currentCity !== '') {
+      getWeather(currentCity);
+    }
   }
 }
 

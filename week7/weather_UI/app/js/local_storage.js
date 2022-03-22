@@ -34,6 +34,9 @@ const storage = {
 if (localStorage.getItem('favouriteCities') === null) {
   localStorage.setItem('favouriteCities', '[]');
 }
+if (localStorage.getItem('currentCity') === null) {
+  localStorage.setItem('currentCity', '');
+}
 
 export {
   storage
