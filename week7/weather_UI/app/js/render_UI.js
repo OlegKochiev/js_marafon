@@ -1,8 +1,4 @@
 import {
-  storage
-} from './local_storage.js'
-
-import {
   TAB,
   ACTIVE_CLASS,
   URLS
@@ -100,16 +96,18 @@ const render = {
     document.querySelector('.' + ACTIVE_CLASS.ITEM_TAB).classList.remove(ACTIVE_CLASS.ITEM_TAB);
   },
 
-  createCityItem(city) {
+  createCityItem(city, getWeather) {
     let li = document.createElement('li');
-    let btn = document.createElement('button');
+    let cityBtn = document.createElement('button');
     li.classList.add('weather__location-item');
-    btn.classList.add('weather__location-btn');
-    btn.type = 'button';
-    btn.textContent = city;
-    li.appendChild(btn);
+    cityBtn.classList.add('weather__location-btn');
+    cityBtn.type = 'button';
+    cityBtn.textContent = city;
+    li.appendChild(cityBtn);
     document.querySelector('.weather__location-list').appendChild(li);
-    return btn;
+    cityBtn.addEventListener('click', () => {
+      getWeather(city);
+    });
   },
 
   delCityItem(city) {
@@ -119,6 +117,13 @@ const render = {
         cityItem.remove();
       }
     }
+  },
+
+  showCityItems(currentCity, citys, getWeather) {
+    citys.forEach((city) => {
+      render.createCityItem(city, getWeather);
+    });
+    getWeather(currentCity);
   }
 }
 

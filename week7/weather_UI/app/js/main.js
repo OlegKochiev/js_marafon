@@ -1,9 +1,7 @@
 import {
   UI_ELEMETS,
-  TAB,
   ACTIVE_CLASS,
-  REQUEST_TYPE,
-  URLS
+  REQUEST_TYPE
 } from './consts.js';
 
 import {
@@ -41,7 +39,6 @@ UI_ELEMETS.BTN_FAVOURITE.addEventListener('click', function () {
   } else {
     delFavouriteCity(city);
   }
-  console.log(storage.getFavouriteCities());
 });
 
 
@@ -55,7 +52,6 @@ async function getWeather(city) {
     })
     .catch(alert);
   storage.setCurrentCity(response[0].city);
-  console.log(storage.getCurrentCity());
   render.weatherInfo(response[0]);
   render.forecastInfo(response[1]);
 }
@@ -66,13 +62,14 @@ function isFavourite(btnFavourite) {
 
 function addFavouriteCity(city) {
   storage.addFavouriteCity(city);
-  const favouriteCityItem = render.createCityItem(city);
-  favouriteCityItem.addEventListener('click', () => {
-    getWeather(city);
-  });
+  render.createCityItem(city, getWeather);
 }
 
 function delFavouriteCity(city) {
   storage.delFavouriteCity(city);
   render.delCityItem(city);
 }
+
+const currentCity = storage.getCurrentCity();
+const citys = storage.getFavouriteCities();
+render.showCityItems(currentCity, citys, getWeather);

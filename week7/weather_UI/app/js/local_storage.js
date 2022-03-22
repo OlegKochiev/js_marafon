@@ -1,5 +1,4 @@
 const storage = {
-
   initializeStorage() {
     localStorage.setItem('currentCity', '')
     localStorage.setItem('favouriteCities', '[]');
@@ -30,6 +29,10 @@ const storage = {
     const favoutiteCities = localStorage.getItem('favouriteCities');
     return JSON.parse(favoutiteCities);
   }
+}
+
+if (localStorage.getItem('favouriteCities') === null) {
+  localStorage.setItem('favouriteCities', '[]');
 }
 
 export {
