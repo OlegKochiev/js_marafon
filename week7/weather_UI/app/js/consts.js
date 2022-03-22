@@ -22,7 +22,7 @@ const ACTIVE_CLASS = {
   ITEM_TAB: 'weather__main-item--active'
 }
 
-const REQUEST = {
+const REQUEST_TYPE = {
   WEATHER: 'weather',
   FORECAST: 'FORECAST'
 }
@@ -37,6 +37,6 @@ export {
   UI_ELEMETS,
   TAB,
   ACTIVE_CLASS,
-  REQUEST,
+  REQUEST_TYPE,
   URLS
 }

@@ -1,70 +1,78 @@
 import {
-  REQUEST,
+  UI_ELEMETS,
+  TAB,
+  ACTIVE_CLASS,
+  REQUEST_TYPE,
   URLS
-} from './consts.js'
+} from './consts.js';
 
-const forecastsCount = 5;
-const apiKey = '3d8af9f7ae111ad0770a6a9d37546134';
-
-function doWeatherRequest(city, requestType) {
-  const url = getUrl(city, requestType);
-  return fetch(url)
-    .then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error("Укажите верное название города!");
-      }
-    })
-    .then((weatherDatas) => {
-      switch (requestType) {
-        case REQUEST.WEATHER:
-          return {
-            city: weatherDatas.name,
-              temperature: Math.round(weatherDatas.main.temp - 273),
-              feels_like: Math.round(weatherDatas.main.feels_like - 273),
-              weather: weatherDatas.weather[0].main,
-              sunrise: weatherDatas.sys.sunrise,
-              sunset: weatherDatas.sys.sunset,
-              icon: weatherDatas.weather[0].icon,
-              isFavourite: false
-          };
-        case REQUEST.FORECAST:
-          return {
-            city: weatherDatas.city.name,
-              list: getForecastHourly(weatherDatas)
-          }
-      }
-    })
-}
-
-function getUrl(city, requestType) {
-  let url;
-  switch (requestType) {
-    case REQUEST.WEATHER:
-      url = `${URLS.WEATHER}?q=${city}&appid=${apiKey}`;
-      break;
-    case REQUEST.FORECAST:
-      url = `${URLS.FORECAST}?q=${city}&appid=${apiKey}&units=metric&cnt=${forecastsCount}`;
-      break;
-  }
-  return url;
-}
-
-function getForecastHourly(forecastDatas) {
-  let forecastHours = forecastDatas.list.map((item) => {
-    return {
-      date: (new Date(item.dt * 1000)).toString().substring(4, 11),
-      time: (new Date(item.dt * 1000)).toLocaleTimeString().substring(0, 5),
-      temperature: item.main.temp,
-      feelsLike: item.main.feels_like,
-      weather: item.weather[0].main,
-      icon: item.weather[0].icon
-    }
-  });
-  return forecastHours;
-}
-
-export {
+import {
   doWeatherRequest
+} from './request.js';
+
+import {
+  storage
+} from './local_storage.js';
+
+import {
+  render
+} from './render_UI.js'
+
+UI_ELEMETS.BTN_NOW.addEventListener('click', render.switchNavBtnToActive);
+UI_ELEMETS.BTN_DETAILS.addEventListener('click', render.switchNavBtnToActive);
+UI_ELEMETS.BTN_FORECAST.addEventListener('click', render.switchNavBtnToActive);
+
+UI_ELEMETS.INPUT_SEARCH.addEventListener('keydown', (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    getWeather(event.target.value);
+    event.target.value = '';
+  }
+})
+UI_ELEMETS.BTN_SEARCH.addEventListener('click', () => {
+  const city = UI_ELEMETS.INPUT_SEARCH.value;
+  getWeather(city);
+})
+UI_ELEMETS.BTN_FAVOURITE.addEventListener('click', function () {
+  let city = this.previousSibling.previousSibling.textContent;
+  this.classList.toggle(ACTIVE_CLASS.BTN_FAVOURITE);
+  if (isFavourite(this)) {
+    addFavouriteCity(city);
+  } else {
+    delFavouriteCity(city);
+  }
+  console.log(storage.getFavouriteCities());
+});
+
+
+async function getWeather(city) {
+  const response = await Promise.all([
+      doWeatherRequest(city, REQUEST_TYPE.WEATHER),
+      doWeatherRequest(city, REQUEST_TYPE.FORECAST)
+    ])
+    .then((response) => {
+      return response;
+    })
+    .catch(alert);
+  storage.setCurrentCity(response[0].city);
+  console.log(storage.getCurrentCity());
+  render.weatherInfo(response[0]);
+  render.forecastInfo(response[1]);
+}
+
+function isFavourite(btnFavourite) {
+  return btnFavourite.classList.contains(ACTIVE_CLASS.BTN_FAVOURITE) ? true : false;
+}
+
+function addFavouriteCity(city) {
+  storage.addFavouriteCity(city);
+  const favouriteCityItem = render.createCityItem(city);
+  favouriteCityItem.addEventListener('click', () => {
+    getWeather(city);
+  });
+}
+
+function delFavouriteCity(city) {
+  storage.delFavouriteCity(city);
+  render.delCityItem(city);
 }
