@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {
   UI_ELEMETS,
   TAB,
@@ -9,7 +8,12 @@ import {
 
 import {
   doWeatherRequest
-} from './main.js'
+} from './main.js';
+
+import {
+  storage
+} from './local_storage.js';
+
 UI_ELEMETS.BTN_NOW.addEventListener('click', switchNavBtnToActive);
 UI_ELEMETS.BTN_DETAILS.addEventListener('click', switchNavBtnToActive);
 UI_ELEMETS.BTN_FORECAST.addEventListener('click', switchNavBtnToActive);
@@ -28,21 +32,25 @@ UI_ELEMETS.BTN_FAVOURITE.addEventListener('click', function () {
   let city = this.previousSibling.previousSibling.textContent;
   this.classList.toggle(ACTIVE_CLASS.BTN_FAVOURITE);
   if (isFavourite(this)) {
-    addCityToLocations(city)
+    addFavouriteCity(city);
   } else {
-    delCityFromLocations(city);
+    delFavouriteCity(city);
   }
+  console.log(storage.getFavouriteCities());
 });
 
 
-function getWeather(city) {
-  Promise.all([
-    doWeatherRequest(city, REQUEST.WEATHER),
-    doWeatherRequest(city, REQUEST.FORECAST)
-  ]).then(response => {
-    renderWeatherInfo(response[0]);
-    renderForecastInfo(response[1]);
-  }).catch(alert)
+async function getWeather(city) {
+  const response = await Promise.all([
+      doWeatherRequest(city, REQUEST.WEATHER),
+      doWeatherRequest(city, REQUEST.FORECAST)
+    ])
+    .then((response) => {
+      return response;
+    })
+    .catch(alert);
+  renderWeatherInfo(response[0]);
+  renderForecastInfo(response[1]);
 }
 
 function renderWeatherInfo(weather) {
@@ -138,13 +146,14 @@ function isFavourite(btnFavourite) {
   return btnFavourite.classList.contains(ACTIVE_CLASS.BTN_FAVOURITE) ? true : false;
 }
 
-function addCityToLocations(city) {
+function addFavouriteCity(city) {
   const citysList = document.querySelectorAll('.weather__location-btn');
   for (let cityItem of citysList) {
     if (city === cityItem.textContent) {
       return false;
     }
   }
+  storage.addFavouriteCity(city);
   addCityItem(city);
 }
 
@@ -162,7 +171,8 @@ function addCityItem(city) {
   document.querySelector('.weather__location-list').appendChild(li);
 }
 
-function delCityFromLocations(city) {
+function delFavouriteCity(city) {
+  storage.delFavouriteCity(city);
   let citysList = document.querySelectorAll('.weather__location-btn');
   for (let cityItem of citysList) {
     if (city === cityItem.textContent) {
@@ -170,3 +180,5 @@ function delCityFromLocations(city) {
     }
   }
 }
+
+storage.initializeStorage();

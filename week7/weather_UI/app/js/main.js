@@ -4,7 +4,7 @@ import {
 } from './consts.js'
 
 const forecastsCount = 5;
-const apiKey = '1041b355b3b6422eb66d9f5e517f7b52';
+const apiKey = '3d8af9f7ae111ad0770a6a9d37546134';
 
 function doWeatherRequest(city, requestType) {
   const url = getUrl(city, requestType);
