@@ -71,5 +71,5 @@ function delFavouriteCity(city) {
 }
 
 const currentCity = storage.getCurrentCity();
-const citys = storage.getFavouriteCities();
-render.showCityItems(currentCity, citys, getWeather);
+const cities = storage.getFavouriteCities();
+render.showCityItems(currentCity, cities, getWeather);

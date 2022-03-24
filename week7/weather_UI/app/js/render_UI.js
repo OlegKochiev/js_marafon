@@ -119,13 +119,11 @@ const render = {
     }
   },
 
-  showCityItems(currentCity, citys, getWeather) {
-    citys.forEach((city) => {
+  showCityItems(currentCity, cities, getWeather) {
+    for (let city of cities) {
       render.createCityItem(city, getWeather);
-    });
-    if (currentCity !== '') {
-      getWeather(currentCity);
-    }
+    };
+    getWeather(currentCity);
   }
 }
 

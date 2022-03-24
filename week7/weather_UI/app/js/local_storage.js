@@ -1,7 +1,12 @@
 const storage = {
   initializeStorage() {
-    localStorage.setItem('currentCity', '')
-    localStorage.setItem('favouriteCities', '[]');
+    if (localStorage.getItem('favouriteCities') === null) {
+      const favouriteCities = new Set();
+      storage.save(favouriteCities);
+    }
+    if (localStorage.getItem('currentCity') === null) {
+      localStorage.setItem('currentCity', 'Moscow');
+    }
   },
 
   setCurrentCity(city) {
@@ -12,31 +17,30 @@ const storage = {
     return localStorage.getItem('currentCity');
   },
 
+
   addFavouriteCity(city) {
-    let favoutiteCities = JSON.parse(localStorage.getItem('favouriteCities'));
-    favoutiteCities.push(city);
-    localStorage.setItem('favouriteCities', JSON.stringify(favoutiteCities));
+    let favouriteCities = storage.getFavouriteCities();
+    favouriteCities.add(city);
+    storage.save(favouriteCities);
   },
 
   delFavouriteCity(cityRemovable) {
-    let favoutiteCities = JSON.parse(localStorage.getItem('favouriteCities'));
-    const cityIndex = favoutiteCities.findIndex((city) => city === cityRemovable);
-    favoutiteCities.splice(cityIndex, 1);
-    localStorage.setItem('favouriteCities', JSON.stringify(favoutiteCities));
+    let favouriteCities = storage.getFavouriteCities();
+    favouriteCities.delete(cityRemovable);
+    storage.save(favouriteCities);
   },
 
   getFavouriteCities() {
-    const favoutiteCities = localStorage.getItem('favouriteCities');
-    return JSON.parse(favoutiteCities);
+    const favouriteCities = localStorage.getItem('favouriteCities');
+    return new Set(JSON.parse(favouriteCities));
+  },
+
+  save(favouriteCities) {
+    localStorage.setItem('favouriteCities', JSON.stringify([...favouriteCities]));
   }
 }
 
-if (localStorage.getItem('favouriteCities') === null) {
-  localStorage.setItem('favouriteCities', '[]');
-}
-if (localStorage.getItem('currentCity') === null) {
-  localStorage.setItem('currentCity', '');
-}
+storage.initializeStorage();
 
 export {
   storage
