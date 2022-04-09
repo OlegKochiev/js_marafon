@@ -1,69 +1,97 @@
 // @ts-nocheck
-const calcInput = document.getElementById('calcInput');
-const ZERO = '0';
-const KEYPAD_EQUAL = '=';
-const KEYPAD_CLEAR = 'С';
-const KEYPAD_BACKSPACE = 'backspace';
-const KEYPAD_OPERATIONS = '×÷+-';
-
+const calcInput = document.getElementById("calcInput");
+const ZERO = "0";
+const KEYPAD_EQUAL = "=";
+const KEYPAD_CLEAR = "С";
+const KEYPAD_BACKSPACE = "backspace";
+const KEYPAD_OPERATIONS = "×÷+-";
 
 const KEYPAD_NUMBERS = {
   0: ZERO,
-  1: '1',
-  2: '2',
-  3: '3',
-  4: '4',
-  5: '5',
-  6: '6',
-  7: '7',
-  8: '8',
-  9: '9'
-}
+  1: "1",
+  2: "2",
+  3: "3",
+  4: "4",
+  5: "5",
+  6: "6",
+  7: "7",
+  8: "8",
+  9: "9",
+};
 
 const FONT_SIZE = {
-  96: '96px',
-  55: '55px',
-  35: '35px',
-  25: '25px'
+  96: "96px",
+  55: "55px",
+  35: "35px",
+  25: "25px",
+};
+
+document.getElementById("equalBtn").addEventListener("click", calculate);
+document.getElementById("clearBtn").addEventListener("click", clearInput);
+document.getElementById("backspaceBtn").addEventListener("click", backspaceInput);
+document.querySelectorAll(".calc__btn--number").forEach((btnNumber) => {
+  btnNumber.addEventListener("click", addNumberInInput);
+});
+document.querySelectorAll(".calc__btn--operation").forEach((btnOperation) => {
+  btnOperation.addEventListener("click", addOperationInInput);
+});
+
+function setInputFontSize(fontSize) {
+  calcInput.style.fontSize = fontSize;
 }
 
-
-
-document.getElementById('equalBtn').addEventListener('click', calculate);
-document.getElementById('clearBtn').addEventListener('click', clearInput);
-document.getElementById('backspaceBtn').addEventListener('click', backspaceInput);
-document.querySelectorAll('.calc__btn--number').forEach(btnNumber => {
-  btnNumber.addEventListener('click', addNumberInInput);
-});
-document.querySelectorAll('.calc__btn--operation').forEach(btnOperation => {
-  btnOperation.addEventListener('click', addOperationInInput);
-});
+function checkNumbersLength() {
+  switch (true) {
+    case (calcInput.value.length > 16):
+      setInputFontSize(FONT_SIZE[25]);
+      break;
+    case (calcInput.value.length > 10):
+      setInputFontSize(FONT_SIZE[35]);
+      break;
+    case (calcInput.value.length >= 6):
+      setInputFontSize(FONT_SIZE[55]);
+      break;
+    case (calcInput.value.length < 6):
+      setInputFontSize(FONT_SIZE[96]);
+      break;
+    default:
+      console.log("Something is wrong!");
+      break;
+  }
+}
 
 function addOperationInInput(event) { // Эта функция добавляет математический оператор в поле input
   checkNumbersLength();
   const operation = event.target.textContent;
   let calcValue = calcInput.value;
   if (calcValue !== ZERO) {
-    KEYPAD_OPERATIONS.includes(calcValue[calcValue.length - 1]) ? calcValue = calcValue.slice(0, -1) + operation : calcValue += operation;
+    if (KEYPAD_OPERATIONS.includes(calcValue[calcValue.length - 1])) {
+      calcValue = calcValue.slice(0, -1) + operation;
+    } else {
+      calcValue += operation;
+    }
     calcInput.value = calcValue; // доваляем математический оператор в выражение
-  } else if (calcValue === ZERO && operation === '-') {
+  } else if (calcValue === ZERO && operation === "-") {
     calcInput.value = operation;
   }
 }
 
 function addNumberInInput(event) { // Эта функия добавляет цифру в поле input
   checkNumbersLength();
-  let number = event.target.textContent;
+  const number = event.target.textContent;
   let calcValue = calcInput.value;
-
   switch (true) {
     case calcValue === ZERO && number !== ZERO:
       calcValue = number;
       calcInput.value = calcValue;
       break;
-    case !(KEYPAD_OPERATIONS.includes(calcValue[calcValue.length - 1]) && number === ZERO && calcValue !== ZERO):
+    case !(KEYPAD_OPERATIONS.includes(calcValue[calcValue.length - 1])
+    && number === ZERO
+    && calcValue !== ZERO):
       calcValue += number;
       calcInput.value = calcValue;
+      break;
+    default:
       break;
   }
 }
@@ -74,7 +102,7 @@ function clearInput() { // Очищаем поле ввода input
 }
 
 function backspaceInput() { // Удалаем последний символ из поля ввода input
-  let calcValue = calcInput.value;
+  const calcValue = calcInput.value;
   if (calcValue.length > 1) { // Если удаляем последнюю цифру, то на ее место ставим 0
     calcInput.value = calcValue.slice(0, -1);
   } else {
@@ -83,37 +111,13 @@ function backspaceInput() { // Удалаем последний символ и
   checkNumbersLength();
 }
 
-function checkNumbersLength() {
-  switch (true) {
-    case (calcInput.value.length > 16):
-      setInputFontSize(FONT_SIZE[25])
-      break;
-    case (calcInput.value.length > 10):
-      setInputFontSize(FONT_SIZE[35])
-      break;
-    case (calcInput.value.length >= 6):
-      setInputFontSize(FONT_SIZE[55])
-      break;
-    case (calcInput.value.length < 6):
-      setInputFontSize(FONT_SIZE[96])
-      break;
-    default:
-      console.log('Something is wrong!');
-      break;
-  }
-}
-
-function setInputFontSize(fontSize) {
-  calcInput.style.fontSize = fontSize;
-}
-
 function calculate() {
-  let numbersArray = [];
-  let operationsArray = [];
-  let expression = calcInput.value;
+  const numbersArray = [];
+  const operationsArray = [];
+  const expression = calcInput.value;
   let result = 0;
   splitInputExpression(expression);
-  numbersArray.length === operationsArray.length ? operationsArray.pop() : '';
+  numbersArray.length === operationsArray.length ? operationsArray.pop() : "";
   result = +getResult().toFixed(2);
   calcInput.value = result;
   checkNumbersLength();
@@ -127,7 +131,7 @@ function calculate() {
         return;
       }
     }
-    string !== '' ? numbersArray.push(string) : '';
+    string !== "" ? numbersArray.push(string) : "";
   }
 
   function getResult() {
@@ -136,17 +140,19 @@ function calculate() {
         for (let i = 0; i < operationsArray.length; i++) {
           if (KEYPAD_OPERATIONS[j] === operationsArray[i]) {
             switch (operationsArray[i]) {
-              case '×':
+              case "×":
                 numbersArray[i] = +numbersArray[i] * +numbersArray[i + 1];
                 break;
-              case '÷':
+              case "÷":
                 numbersArray[i] = +numbersArray[i] / +numbersArray[i + 1];
                 break;
-              case '+':
+              case "+":
                 numbersArray[i] = +numbersArray[i] + +numbersArray[i + 1];
                 break;
-              case '-':
+              case "-":
                 numbersArray[i] = +numbersArray[i] - +numbersArray[i + 1];
+                break;
+              default:
                 break;
             }
             numbersArray.splice(i + 1, 1);
@@ -154,7 +160,7 @@ function calculate() {
           }
         }
       }
-    } while (numbersArray.length > 1)
+    } while (numbersArray.length > 1);
     return numbersArray[0];
   }
 }
