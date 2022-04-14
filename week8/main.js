@@ -1,6 +1,6 @@
 // Остаточные параметры 
 function sumAll(...args) { // args — имя массива
-  let sum = 0;
+  let sum = 1;
 
   for (let arg of args) {
     sum += arg;
