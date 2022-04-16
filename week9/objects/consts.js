@@ -1,12 +1,14 @@
-const STORAGE_TYPE = {
-  DEFAULT: 'local',
-  LOCAL: 'local',
-  SESSION: 'session'
+const DEFAULT_STORAGE = 'local';
+const EMPTY_STORAGE = 'null';
+
+const STORAGE = {
+  session: sessionStorage,
+  local: localStorage
 }
 
-const EMPTY_STORAGE = null;
 
 export {
-  STORAGE_TYPE,
-  EMPTY_STORAGE
+  DEFAULT_STORAGE,
+  EMPTY_STORAGE,
+  STORAGE
 }

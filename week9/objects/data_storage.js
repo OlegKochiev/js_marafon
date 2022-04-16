@@ -1,32 +1,29 @@
 import {
-  STORAGE_TYPE,
-  EMPTY_STORAGE
-} from './consts'
+  DEFAULT_STORAGE,
+  EMPTY_STORAGE,
+  STORAGE
+} from './consts.js';
 class Storage {
-  constructor(key, storageType = STORAGE_TYPE.DEFAULT) {
+  constructor(key, storageType = DEFAULT_STORAGE) {
     this.key = key;
-    this.storageType = storageType;
+    this.storage = STORAGE[storageType];
     this.set(EMPTY_STORAGE);
   }
 
   get() {
-    return this.#isLocalStorage ? localStorage.getItem(this.key) : sessionStorage.getItem(this.key);
+    return this.storage.getItem(this.key);
   }
   
   set(value) {
-    return this.#isLocalStorage ? localStorage.setItem(this.key, value) : sessionStorage.setItem(this.key, value);
+    return this.storage.setItem(this.key, value);
   }
   
   clear() {
-    return this.#isLocalStorage ? localStorage.setItem(this.key, EMPTY_STORAGE) : sessionStorage.setItem(this.key, EMPTY_STORAGE);
+    return this.storage.setItem(this.key, EMPTY_STORAGE);
   }
   
   isEmpty() {
-    return this.#isLocalStorage ? localStorage.getItem(this.key) === EMPTY_STORAGE : sessionStorage.getItem(this.key) === EMPTY_STORAGE;
-  }
-
-  #isLocalStorage() {
-    return this.storageType === STORAGE_TYPE.LOCAL;
+    return this.storage.getItem(this.key) === EMPTY_STORAGE;
   }
 }
 
