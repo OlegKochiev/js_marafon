@@ -12,7 +12,7 @@ console.log(dogsList.get());
 dogsList.clear();
 console.log(dogsList.isEmpty());
 
-const catsList = new Storage('dogs', 'session');
+const catsList = new Storage('cats', 'session');
 catsList.set('Murka');
 console.log(catsList.isEmpty());
 console.log(catsList.get());

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat | App</title>
+  <link rel="stylesheet" href="css/style.min.css">
+</head>
+
+<body>
+  <h1 class="sr-only">Chat App</h1>
+
+  <div class="chat">
+    <nav class="chat__nav">
+      <button class="chat__btn-settings btn">Настройки</button>
+      <button class="chat__btn-quit btn">Выйти</button>
+    </nav>
+    <div class="chat__history">
+      <div class="chat__history-wrapper">
+        <p class="chat__message float-right">
+          Я: Добрый день!
+          <time class="chat__time">18:45</time>
+        </p>
+        <p class="chat__message float-left">
+          Собеседник мой: Добрый день!
+          <time class="chat__time">18:45</time>
+        </p>
+        <p class="chat__message float-left">
+          Собеседник мой: А это второе и, кажется, оно очень 
+          длинное, чтобы поместиться на 
+          одной строке
+          <time class="chat__time">18:45</time>
+        </p>
+        <p class="chat__message float-right">
+          Я: Добрый день!
+          <time class="chat__time">18:45</time>
+        </p>
+        <p class="chat__message float-right">
+          Я: Добрый день!
+          <time class="chat__time">18:45</time>
+        </p>
+        <p class="chat__message float-left">
+          Собеседник мой: Добрый день!
+          <time class="chat__time">18:45</time>
+        </p>
+        <p class="chat__message float-left">
+          Собеседник мой: А это второе и, кажется, оно очень 
+          длинное, чтобы поместиться на 
+          одной строке
+          <time class="chat__time">18:45</time>
+        </p>
+        <p class="chat__message float-right">
+          Я: Добрый день!
+          <time class="chat__time">18:45</time>
+        </p>
+        <p class="chat__message float-right">
+          Я: Добрый день!
+          <time class="chat__time">18:45</time>
+        </p>
+        <p class="chat__message float-left">
+          Собеседник мой: Добрый день!
+          <time class="chat__time">18:45</time>
+        </p>
+        <p class="chat__message float-left">
+          Собеседник мой: А это второе и, кажется, оно очень 
+          длинное, чтобы поместиться на 
+          одной строке
+          <time class="chat__time">18:45</time>
+        </p>
+        <p class="chat__message float-right">
+          Я: Добрый день!
+          <time class="chat__time">18:45</time>
+        </p>
+      </div>
+    </div>
+    <form class="chat__form form" action="">
+      <label class="sr-only" for="inputChat">chat input</label>
+
+      <input class="form__input"  type="text" name="inputChat" id="inputChat"  placeholder="Сообщение..">
+
+      <button class="form__btn-send btn" id="btnForm" type="button"></button>
+    </form>
+  </div>
+
+
+  <div class="modal-fade">
+    <div class="modal-settings">
+      <div class="modal-settings__header">
+        <p class="modal-settings__title">
+          Настройки
+        </p>
+  
+        <button class="modal-settings__btn-close btn"></button>
+      </div>
+      <form class="modal-settings__form form" action="">
+        <label class="form__label" for="inputSettings">Имя в чате</label>
+  
+        <input class="form__input" id="inputSettings" type="text" name="inputSettings" placeholder="Сообщение..">
+        
+        <button class="form__btn-send btn" id="btnSettings" type="button"></button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/main.js" type="module"></script>
+</body>
+
+</html>

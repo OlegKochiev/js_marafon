@@ -1,0 +1,103 @@
+.chat {
+  max-width: 320px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 8px;
+  background-color: $white;
+
+  &__nav {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  &__history {
+    height: 437px;
+    margin-bottom: 8px;
+    overflow-y: scroll;
+    border: 1px solid black;
+    scrollbar-width: none; 
+    
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+  }
+
+  &__history-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    min-height: 100%;
+  }
+
+  &__message {
+    display: inline-block;
+    margin: 8px;
+    padding: 8px;
+    background-color: $medium-gray;
+  }
+  
+  &__time {
+    display: block;
+    font-style: italic;
+    text-align: right;
+  }
+
+  .float-left {
+    align-self: flex-start;
+    margin-left: 8px;
+  }
+
+  .float-right {
+    align-self: flex-end;
+    margin-right: 8px;
+  }
+}
+
+.modal-fade {
+  display: none;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.5;
+    background-color: $gray;
+  }
+}
+
+.modal-settings {
+  position: absolute;
+  max-width: 273px;
+  height: 319px;
+  padding: 14px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $white;
+  z-index: 1;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  &__title {
+    display: inline-block;
+  }
+
+  &__btn-close {
+    width: 19px;
+    height: 19px;
+    border: none;
+    background-image: url('../images/icons/close_btn.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 15px;
+  }
+}
