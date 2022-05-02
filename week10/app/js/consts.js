@@ -1,42 +1,36 @@
 const UI_ELEMETS = {
-  BTN_NOW: document.getElementById('btnNow'),
-  BTN_DETAILS: document.getElementById('btnDetails'),
-  BTN_FORECAST: document.getElementById('btnForecast'),
-  INPUT_SEARCH: document.getElementById('inputForm'),
-  BTN_SEARCH: document.getElementById('btnForm'),
-  BTN_FAVOURITE: document.querySelector('.common-info__favourite')
+  BTN_QUIT: document.getElementById('btnQuit'),
+  BTN_SETTINGS: document.getElementById('btnSettings'),
+  BTN_SEND_MESSAGE: document.getElementById('btnChat'),
+  BTN_AUTH: document.getElementById('btnAuth'),
+  BTN_CONFIRM: document.getElementById('btnConfirm'),
+  BTN_CHANGE_NAME: document.getElementById('btnChangeName'),
+  INPUT_CHAT: document.getElementById('inputChat'),
+  INPUT_AUTH: document.getElementById('inputAuth'),
+  INPUT_CONFIRM: document.getElementById('inputConfirm'),
+  INPUT_SETTINGS: document.getElementById('inputSettings'),
+  MODAL_AUTH: document.querySelector('.modal-auth'),
+  MODAL_CONFIRM: document.querySelector('.modal-confirm'),
+  MODAL_SETTINGS: document.querySelector('.modal-settings'),
+  CHAT_WINDOW: document.querySelector('.chat__history-wrapper')
 }
 
-const TAB = {
-  BNT_NOW: 'Now',
-  BNT_DETAILS: 'Details',
-  BNT_FORECAST: 'Forecast',
-  TAB_NOW: document.querySelectorAll('.weather__main-item')[0],
-  TAB_DETAILS: document.querySelectorAll('.weather__main-item')[1],
-  TAB_FORECAST: document.querySelectorAll('.weather__main-item')[2],
-}
-
-const ACTIVE_CLASS = {
-  BTN_FAVOURITE: 'common-info__favourite--active',
-  BTN_NAV: 'weather__nav-btn--active',
-  ITEM_TAB: 'weather__main-item--active'
-}
-
-const REQUEST_TYPE = {
-  WEATHER: 'weather',
-  FORECAST: 'FORECAST'
+const DEFAULT = {
+  USER_NAME: 'oleg',
+  EMAIL: 'olegkochiev19@gmail.com',
+  CSS_CLASS_ACTIVE: '.active',
+  TOKEN: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9sZWdrb2NoaWV2MTlAZ21haWwuY29tIiwiaWF0IjoxNjUxNDE5NzMzLCJleHAiOjE2NTE4NjYxMzN9.4_l-oByAHwanI20DhkmakTXumHBiROSSsAWg_YGQDrw'
 }
 
 const URLS = {
-  WEATHER: 'https://api.openweathermap.org/data/2.5/weather',
-  FORECAST: 'https://api.openweathermap.org/data/2.5/forecast',
-  WEATHER_ICON: 'http://openweathermap.org/img/wn/'
+  HOME: 'https://mighty-cove-31255.herokuapp.com/api/user',
+  USER_INFO: 'https://mighty-cove-31255.herokuapp.com/api/user/me',
+  MESSAGES: 'https://mighty-cove-31255.herokuapp.com/api/messages',
+  WEB_SOCKET: `ws://mighty-cove-31255.herokuapp.com/websockets?${getCookie('token') ?? DEFAULT.TOKEN}`
 }
 
 export {
   UI_ELEMETS,
-  TAB,
-  ACTIVE_CLASS,
-  REQUEST_TYPE,
-  URLS
+  URLS, 
+  DEFAULT
 }

@@ -1,109 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chat | App</title>
+  <title>Чат | Приложение</title>
   <link rel="stylesheet" href="css/style.min.css">
 </head>
 
 <body>
-  <h1 class="sr-only">Chat App</h1>
+  <h1 class="sr-only">Приложение "Чат"</h1>
 
-  <div class="chat">
-    <nav class="chat__nav">
-      <button class="chat__btn-settings btn">Настройки</button>
-      <button class="chat__btn-quit btn">Выйти</button>
-    </nav>
-    <div class="chat__history">
-      <div class="chat__history-wrapper">
-        <p class="chat__message float-right">
-          Я: Добрый день!
-          <time class="chat__time">18:45</time>
-        </p>
-        <p class="chat__message float-left">
-          Собеседник мой: Добрый день!
-          <time class="chat__time">18:45</time>
-        </p>
-        <p class="chat__message float-left">
-          Собеседник мой: А это второе и, кажется, оно очень 
-          длинное, чтобы поместиться на 
-          одной строке
-          <time class="chat__time">18:45</time>
-        </p>
-        <p class="chat__message float-right">
-          Я: Добрый день!
-          <time class="chat__time">18:45</time>
-        </p>
-        <p class="chat__message float-right">
-          Я: Добрый день!
-          <time class="chat__time">18:45</time>
-        </p>
-        <p class="chat__message float-left">
-          Собеседник мой: Добрый день!
-          <time class="chat__time">18:45</time>
-        </p>
-        <p class="chat__message float-left">
-          Собеседник мой: А это второе и, кажется, оно очень 
-          длинное, чтобы поместиться на 
-          одной строке
-          <time class="chat__time">18:45</time>
-        </p>
-        <p class="chat__message float-right">
-          Я: Добрый день!
-          <time class="chat__time">18:45</time>
-        </p>
-        <p class="chat__message float-right">
-          Я: Добрый день!
-          <time class="chat__time">18:45</time>
-        </p>
-        <p class="chat__message float-left">
-          Собеседник мой: Добрый день!
-          <time class="chat__time">18:45</time>
-        </p>
-        <p class="chat__message float-left">
-          Собеседник мой: А это второе и, кажется, оно очень 
-          длинное, чтобы поместиться на 
-          одной строке
-          <time class="chat__time">18:45</time>
-        </p>
-        <p class="chat__message float-right">
-          Я: Добрый день!
-          <time class="chat__time">18:45</time>
-        </p>
+  <div class="messanger">
+    
+    <div class="chat">
+      <nav class="chat__nav">
+        <button class="chat__btn-settings btn" id="btnSettings" type="button">Настройки</button>
+        <button class="chat__btn-quit btn" id="btnQuit" type="button">Выйти</button>
+      </nav>
+
+      <div class="chat__history">
+        <div class="chat__history-wrapper">
+        </div>
       </div>
-    </div>
-    <form class="chat__form form" action="">
-      <label class="sr-only" for="inputChat">chat input</label>
 
-      <input class="form__input"  type="text" name="inputChat" id="inputChat"  placeholder="Сообщение..">
+      <form class="chat__form form" action="#">
+        <label class="sr-only" for="inputChat">Введите текст сообщения:</label>
 
-      <button class="form__btn-send btn" id="btnForm" type="button"></button>
-    </form>
-  </div>
+        <input class="form__input"  type="text" name="inputChat" id="inputChat"  placeholder="Сообщение.." autofocus>
 
-
-  <div class="modal-fade">
-    <div class="modal-settings">
-      <div class="modal-settings__header">
-        <p class="modal-settings__title">
-          Настройки
-        </p>
-  
-        <button class="modal-settings__btn-close btn"></button>
-      </div>
-      <form class="modal-settings__form form" action="">
-        <label class="form__label" for="inputSettings">Имя в чате</label>
-  
-        <input class="form__input" id="inputSettings" type="text" name="inputSettings" placeholder="Сообщение..">
-        
-        <button class="form__btn-send btn" id="btnSettings" type="button"></button>
+        <button class="form__btn-send btn" id="btnChat" type="submit"></button>
       </form>
     </div>
-  </div>
 
+    <div class="modal-auth modal">
+      <div class="modal__inner">
+        <header class="modal__header">
+          <h2 class="modal__title">
+            Авторизация
+          </h2>
+    
+          <button class="modal__btn-close btn" type="button"></button>
+        </header>
+        <form class="modal__form form" action="#">
+          <label class="form__label" for="inputAuth">Почта: </label>
+          <input class="form__input" id="inputAuth" type="email" name="inputAuth">
+    
+          <button class="form__btn-send btn" id="btnAuth" type="submit">Получить код</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-confirm modal">
+      <div class="modal__inner">
+        <header class="modal__header">
+          <h2 class="modal__title">
+            Подтверждение
+          </h2>
+    
+          <button class="modal__btn-close btn" type="button"></button>
+        </header>
+        <form class="modal__form form" action="#">
+          <label class="form__label" for="inputConfirm">Код:</label>
+          <input class="form__input" id="inputConfirm" type="text" name="inputConfirm">
+    
+          <button class="form__btn-send btn" id="btnConfirm" type="submit">Войти</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-settings modal">
+      <div class="modal__inner">
+        <header class="modal__header">
+          <h2 class="modal__title">
+            Настройки
+          </h2>
+    
+          <button class="modal__btn-close btn" type="button"></button>
+        </header>
+        <form class="modal__form form" action="#">
+          <label class="form__label" for="inputSettings">Имя в чате</label>
+          <input class="form__input" id="inputSettings" type="text" name="inputSettings" placeholder="Сообщение..">
+          
+          <button class="form__btn-send btn" id="btnChangeName" type="submit"></button>
+        </form>
+      </div>
+    </div>
+  </div>  
+
+  <template class="message__me">
+    <p class="chat__message float-right">
+      <time class="chat__time"></time>
+    </p>
+  </template>
+
+  <template class="message__companion">
+    <p class="chat__message float-left">  
+      <time class="chat__time"></time>
+    </p>
+  </template>
+
+  <script src="https://unpkg.com/cookielib/src/cookie.min.js"></script>
   <script src="js/main.js" type="module"></script>
 </body>
 

@@ -1,7 +1,11 @@
-.chat {
+.messanger {
+  position: relative;
   max-width: 320px;
   width: 100%;
   margin: 0 auto;
+}
+
+.chat {
   padding: 8px;
   background-color: $white;
 
@@ -53,51 +57,36 @@
     align-self: flex-end;
     margin-right: 8px;
   }
-}
 
-.modal-fade {
-  display: none;
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0.5;
-    background-color: $gray;
-  }
+  .form {
+    &__btn-send {
+      width: 32px;
+      height: 32px;
+      background-image: url('../images/icons/send_arrow.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 15px;
+    }
+  } 
 }
 
 .modal-settings {
-  position: absolute;
-  max-width: 273px;
-  height: 319px;
-  padding: 14px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: $white;
-  z-index: 1;
+  .form {
+    &__input {  
+      flex-grow: 1;
+    }
 
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
+    &__btn-send {
+      width: 32px;
+      height: 32px;
+      background-image: url('../images/icons/send_arrow.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 15px;
+    }
   }
+}
 
-  &__title {
-    display: inline-block;
-  }
-
-  &__btn-close {
-    width: 19px;
-    height: 19px;
-    border: none;
-    background-image: url('../images/icons/close_btn.svg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 15px;
-  }
+.active {
+  display: block;
 }

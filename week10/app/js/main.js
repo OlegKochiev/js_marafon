@@ -1,36 +1,115 @@
 import {
   UI_ELEMETS,
-  ACTIVE_CLASS,
-  REQUEST_TYPE
+  DEFAULT
 } from './consts.js';
 
 import {
-  doWeatherRequest
-} from './request.js';
+  MODAL
+} from './render.js';
 
 import {
-  storage
-} from './local_storage.js';
+  verifyEmail,
+  changeUserName,
+  getUserInfo, 
+  getMessages
+} from './api.js'
 
 import {
-  render
-} from './render_UI.js'
+  sendMessage
+} from './socket.js'
 
-UI_ELEMETS.BTN_NOW.addEventListener('click', render.switchNavBtnToActive);
-UI_ELEMETS.BTN_DETAILS.addEventListener('click', render.switchNavBtnToActive);
-UI_ELEMETS.BTN_FORECAST.addEventListener('click', render.switchNavBtnToActive);
+UI_ELEMETS.BTN_QUIT.addEventListener('click', MODAL.QUIT);
 
-UI_ELEMETS.INPUT_SEARCH.addEventListener('keydown', (event) => {
+UI_ELEMETS.BTN_SETTINGS.addEventListener('click', () => {
+  MODAL.SHOW(UI_ELEMETS.MODAL_SETTINGS);
+});
+
+document.querySelectorAll('.modal__btn-close').forEach((btnClose) => {
+  btnClose.addEventListener('click', MODAL.HIDE);
+});
+
+UI_ELEMETS.BTN_AUTH.addEventListener('click', async (event) => {
+  event.preventDefault();
+  if (!getCookie('token')) {
+    const email = UI_ELEMETS.INPUT_AUTH.value ?? DEFAULT.EMAIL;
+    await verifyEmail(email);
+    MODAL.HIDE();
+    MODAL.SHOW(UI_ELEMETS.MODAL_CONFIRM);
+  } else {
+    MODAL.HIDE()
+  }
+})
+
+UI_ELEMETS.INPUT_AUTH.addEventListener('keydown', async (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    if (!getCookie('token')) {
+      const email = UI_ELEMETS.INPUT_AUTH.value ?? defaultEmail;
+      await verifyEmail(email);
+      event.target.value = '';
+      MODAL.HIDE();
+      MODAL.SHOW(UI_ELEMETS.MODAL_CONFIRM);
+    } else {
+      MODAL.HIDE();
+    }
+  }
+})
+
+UI_ELEMETS.BTN_CONFIRM.addEventListener('click', async (event) => {
+  event.preventDefault();
+  const token = UI_ELEMETS.INPUT_CONFIRM.value;
+  setCookie('token', token);
+  MODAL.HIDE();
+});
+
+UI_ELEMETS.INPUT_CONFIRM.addEventListener('keydown', (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    const token = UI_ELEMETS.INPUT_CONFIRM.value;
+    setCookie('token', token);
+  }
+})
+
+UI_ELEMETS.BTN_CHANGE_NAME.addEventListener('click', async(event) => {
+  event.preventDefault();
+  const userName = UI_ELEMETS.INPUT_SETTINGS.value ?? DEFAULT.USER_NAME;
+  await changeUserName(userName);
+  let userInfo = await getUserInfo()
+  console.log(userInfo);
+  MODAL.HIDE();
+
+})
+
+UI_ELEMETS.BTN_SEND_MESSAGE.addEventListener('click', async(event) => {
+  event.preventDefault();
+  let messages = await getMessages();
+  console.log(messages);
+})
+
+UI_ELEMETS.INPUT_CHAT.addEventListener('keydown', function (event) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    const message = this.value;
+    sendMessage(message);
+    this.value = '';
+  }
+})
+
+
+
+/* UI_ELEMETS.INPUT_SEARCH.addEventListener('keydown', (event) => {
   if (event.key === "Enter") {
     event.preventDefault();
     getWeather(event.target.value);
     event.target.value = '';
   }
 })
+
 UI_ELEMETS.BTN_SEARCH.addEventListener('click', () => {
   const city = UI_ELEMETS.INPUT_SEARCH.value;
   getWeather(city);
 })
+
 UI_ELEMETS.BTN_FAVOURITE.addEventListener('click', function () {
   let city = this.previousSibling.previousSibling.textContent;
   this.classList.toggle(ACTIVE_CLASS.BTN_FAVOURITE);
@@ -72,4 +151,4 @@ function delFavouriteCity(city) {
 
 const currentCity = storage.getCurrentCity();
 const cities = storage.getFavouriteCities();
-render.showCityItems(currentCity, cities, getWeather);
+render.showCityItems(currentCity, cities, getWeather); */

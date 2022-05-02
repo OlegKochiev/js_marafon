@@ -1,14 +1,11 @@
 body {
-  position: relative;
-  height: 100vh;
+  padding-top: 20px;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: 400;
   color: $dark;
   background-color: $lite-gray;
 }
-
-
 
 .sr-only {
   position: absolute;
@@ -21,24 +18,6 @@ body {
   clip-path: inset(100%);
   clip: rect(0 0 0 0);
   overflow: hidden;
-}
-
-.btn {
-  padding: 6px 8px;
-  background-color: $white;
-  border: 1px solid $black;
-  transition: background-color 0.2s;
-
-  &:focus {
-  }
-  
-  &:hover {
-    background-color: $lite-gray;
-  }
-  
-  &:active {
-    background-color: $medium-gray;
-  }
 }
 
 .form {
@@ -59,13 +38,69 @@ body {
     padding-left: 6px;
     border: 1px solid black;
   }
+}
 
-  &__btn-send {
-    width: 32px;
-    height: 32px;
-    background-image: url('../images/icons/send_arrow.svg');
+.btn {
+  padding: 6px 8px;
+  background-color: $white;
+  border: 1px solid $black;
+  transition: background-color 0.2s;
+  
+  &:hover {
+    background-color: $lite-gray;
+  }
+  
+  &:active {
+    background-color: $medium-gray;
+  }
+}
+
+.modal {
+  display: none;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.5;
+    background-color: $gray;
+  }
+
+  &__inner {
+    position: absolute;
+    max-width: 280px;
+    width: 100%;
+    height: 319px;
+    padding: 14px 17px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: $white;
+    z-index: 1;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 70px;
+  }
+
+  &__btn-close {
+    width: 19px;
+    height: 19px;
+    border: none;
+    background-image: url('../images/icons/close_btn.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 15px;
+  }
+
+  .form {
+    &__input {
+      margin-bottom: 7px;
+    }
   }
 }

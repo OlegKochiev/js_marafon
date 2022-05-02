@@ -16,5 +16,8 @@
     "gulp-sass": "^5.0.0",
     "sass": "^1.44.0"
   },
-  "type": "commonjs"
+  "type": "module",
+  "dependencies": {
+    "date-fns": "^2.28.0"
+  }
 }
