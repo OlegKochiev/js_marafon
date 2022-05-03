@@ -1,62 +1,89 @@
 import {
-  URLS
+  URLS,
+  UI_ELEMETS
 } from './consts.js';
 
-async function verifyEmail(email) {
-  let response = await fetch(URLS.HOME, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8'
-    },
-    body: JSON.stringify({ email: email })
-  });
-}
+import {
+  render
+} from './render.js'
 
-async function changeUserName(name) {
-  const token = getCookie('token');
-  let response = await fetch(URLS.HOME, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-      'Authorization': `Bearer ${token}`
-    },
-    body: JSON.stringify({ name: name })
-  });
-  let nameUpdated = await response.json();
-  return nameUpdated;
-}
-
-async function getUserInfo() {
-  const token = getCookie('token');
-  let response = await fetch(URLS.USER_INFO, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-      'Authorization': `Bearer ${token}`
+const API = {
+  async verifyEmail(email) {
+    try {
+      let response = await fetch(URLS.HOME, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify({ email: email })
+    });
+    } catch (error) {
+      console.log(error);
     }
-  });
-  let userInfo = await response.json();
-  return userInfo;
-}
-
-async function getMessages() {
-  const token = getCookie('token');
-  let response = await fetch(URLS.MESSAGES, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-      'Authorization': `Bearer ${token}`
+  },
+  
+  async changeUserName(name) {
+    try {
+      const token = getCookie('token');
+      let response = await fetch(URLS.HOME, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ name: name })
+      });
+      let nameUpdated = await response.json();
+      return nameUpdated;
+    } catch (error) {
+      console.log(error);
     }
-  });
-  let messages = await response.json();
-  return messages;
+  },
+  
+  async getUserInfo() {
+    try {
+      const token = getCookie('token');
+      let response = await fetch(URLS.USER_INFO, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      let userInfo = await response.json();
+      return userInfo;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  
+  async getMessages() {
+    try {
+      const token = getCookie('token');
+      let response = await fetch(URLS.MESSAGES, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      let messages = await response.json();
+      return messages;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  quitFromApplication() {
+    const quit = confirm('Вы действительно хотите выйти?');
+    if (quit) {
+      deleteCookie('token');
+      render.hideModal();
+      render.showModal(UI_ELEMETS.MODAL_AUTH);
+    }
+  }
 }
-
-
 
 export {
-  verifyEmail,
-  changeUserName,
-  getUserInfo,
-  getMessages
+  API
 }

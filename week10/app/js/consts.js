@@ -8,7 +8,7 @@ const UI_ELEMETS = {
   INPUT_CHAT: document.getElementById('inputChat'),
   INPUT_AUTH: document.getElementById('inputAuth'),
   INPUT_CONFIRM: document.getElementById('inputConfirm'),
-  INPUT_SETTINGS: document.getElementById('inputSettings'),
+  INPUT_NAME: document.getElementById('inputSettings'),
   MODAL_AUTH: document.querySelector('.modal-auth'),
   MODAL_CONFIRM: document.querySelector('.modal-confirm'),
   MODAL_SETTINGS: document.querySelector('.modal-settings'),

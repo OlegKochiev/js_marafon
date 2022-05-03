@@ -1,40 +1,18 @@
+import moment from './moment.js';
+
 import {
-  UI_ELEMETS
+  UI_ELEMETS,
+  DEFAULT
 } from './consts.js';
 
-import {
-  myEmail
-} from './global.js';
-
-
-const MODAL = {
-  SHOW(modalWindow) {
-    modalWindow.classList.add('active');
-  },
-
-  HIDE() {
-    const activeModal = document.querySelector('.active');
-    activeModal.querySelector('.form__input').value = '';
-    activeModal.classList.remove('active');
-  },
-  
-  QUIT() {
-    const quit = confirm('Вы действительно хотите выйти?');
-    if (quit) {
-      deleteCookie('token');
-      MODAL.SHOW(UI_ELEMETS.MODAL_AUTH);
-    }
-  }
-}
-
 const render = {
-  getMessage(datas) {
+  newMessage(datas) {
     const email = datas.user.email;
     const name = datas.user.name;
     const text = datas.text;
     const date = datas.createdAt;
     let message;
-    if (email === myEmail) {
+    if (email === DEFAULT.EMAIL) {
       message = `
       <p class="chat__message float-right">
       ${name}: ${text}  
@@ -42,16 +20,29 @@ const render = {
       </p>`
     } else {
       message = `
-      <p class="chat__message float-right">
+      <p class="chat__message float-left">
       ${name}: ${text}  
-        <time class="chat__time">${date}</time>
+        <time class="chat__time">${ moment(date).format('LT') }</time>
       </p>`
     }
     UI_ELEMETS.CHAT_WINDOW.innerHTML += message;
+  },
+
+  showModal(modalWindow){
+    modalWindow.classList.add('active');
+  },
+
+  hideModal() {
+    const activeModal = document.querySelector('.active');
+    activeModal.querySelector('.form__input').value = '';
+    activeModal.classList.remove('active');
+  },
+
+  clearInputs() {
+    
   }
 }
 
 export {
-  MODAL,
   render
 }
