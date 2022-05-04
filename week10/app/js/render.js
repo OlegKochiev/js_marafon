@@ -26,6 +26,7 @@ const render = {
       </p>`
     }
     UI_ELEMETS.CHAT_WINDOW.innerHTML += message;
+    UI_ELEMETS.CHAT_WINDOW_SCROLL.scrollTop = UI_ELEMETS.CHAT_WINDOW_SCROLL.scrollHeight;
   },
 
   showModal(modalWindow){

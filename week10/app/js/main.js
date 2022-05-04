@@ -93,7 +93,7 @@ UI_ELEMETS.BTN_SEND_MESSAGE.addEventListener('click', (event) => {
 UI_ELEMETS.INPUT_CHAT.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
     event.preventDefault();
-    const message = this.value;
+    const message = UI_ELEMETS.INPUT_CHAT.value;
     socketHeroku.sendMessage(message);
     UI_ELEMETS.INPUT_CHAT.value = '';
   }

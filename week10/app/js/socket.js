@@ -10,11 +10,11 @@ import {
 
  class SocketConnection {
   constructor(url) {
-    this.url = url;
     this.socket = new WebSocket(url);
 
     this.socket.onopen = () => {
       console.log("Подключение установлено!");
+      this._heartbeat(this);
     }
 
     this.socket.onmessage = (event) => {
@@ -27,7 +27,7 @@ import {
       } else {
         alert('Обрыв соединения'); // например, "убит" процесс сервера
       }
-      alert('Код: ' + event.code + ' причина: ' + event.reason);
+      alert('Код: ' + event.code);
     }
     
     this.socket.onerror = (error) => {
@@ -35,8 +35,9 @@ import {
     }
   }
 
-  reconnect() {
-    this.socket = new WebSocket(this.url);
+  _heartbeat(context) {
+    context.socket.send("heartbeat");
+    setTimeout(context._heartbeat, 30000, context);
   }
 
   sendMessage(text) {
@@ -52,37 +53,6 @@ import {
 }
  
 const socketHeroku = new SocketConnection(URLS.WEB_SOCKET);
-
-/* 
-const socket = new WebSocket(URLS.WEB_SOCKET);
-
-socket.onopen = () => {
-  console.log("Подключение установлено!");
-}
-
-socket.onmessage = (event) => {
-  const message = JSON.parse(event.data);
-  render.newMessage(message);
-}
-
-socket.onclose = (event) => {
-  if (event.wasClean) {
-    alert('Соединение закрыто чисто');
-  } else {
-    alert('Обрыв соединения'); // например, "убит" процесс сервера
-  }
-  alert('Код: ' + event.code + ' причина: ' + event.reason);
-}
-
-socket.onerror = (error) => {
-  alert("Ошибка " + error.message);
-}
-
-function sendMessage(message) {
-  socket.send(JSON.stringify({
-    text: message
-  }))
-} */
 
 export {
   socketHeroku
