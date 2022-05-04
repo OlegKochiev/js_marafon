@@ -21,7 +21,14 @@ const render = {
 
   partMessagesHistory() {
     const oldMessages = this.getPartMessages();
-    console.log(oldMessages);
+    const messagesHistory = oldMessages.reduce((messagesPart, message) => {
+      return messagesPart += render.getMessageTemplate(message);
+    }, '');
+    const chatWindowHeightBefore = UI_ELEMETS.CHAT_WINDOW_SCROLL.scrollHeight;
+    const chatWindowTop = UI_ELEMETS.CHAT_WINDOW_SCROLL.scrollTop;
+    UI_ELEMETS.CHAT_WINDOW.insertAdjacentHTML('afterbegin', messagesHistory);
+    const chatWindowHeightAfter = UI_ELEMETS.CHAT_WINDOW_SCROLL.scrollHeight;
+    UI_ELEMETS.CHAT_WINDOW_SCROLL.scrollTop = chatWindowTop + chatWindowHeightAfter - chatWindowHeightBefore;
   },
 
   showModal(modalWindow){
@@ -37,7 +44,7 @@ const render = {
   getMessageTemplate(datas) {
     const email = datas.user.email;
     const name = datas.user.name;
-    const text = datas.text;
+    const text = datas.text/* .replaceAll('<', '').replaceAll('>','').replaceAll('(', '').replaceAll(')', '') */;
     const date = moment(datas.createdAt).format('LT') ;
     const isIAm = email === DEFAULT.EMAIL;
     let message = `

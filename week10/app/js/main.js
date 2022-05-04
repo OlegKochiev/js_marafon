@@ -99,7 +99,9 @@ UI_ELEMETS.INPUT_CHAT.addEventListener('keydown', (event) => {
   }
 })
 
-/* UI_ELEMETS.CHAT_WINDOW_SCROLL.addEventListener('scroll', () => {
-  console.log(UI_ELEMETS.CHAT_WINDOW_SCROLL.scrollTop);
-  console.log(UI_ELEMETS.CHAT_WINDOW_SCROLL.scrollHeight);
-}) */
+UI_ELEMETS.CHAT_WINDOW_SCROLL.addEventListener('scroll', () => {
+  const scrollTop = UI_ELEMETS.CHAT_WINDOW_SCROLL.scrollTop;
+  if(scrollTop === 0) {
+    render.partMessagesHistory();
+  }
+});

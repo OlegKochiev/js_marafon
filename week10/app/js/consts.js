@@ -28,7 +28,7 @@ const URLS = {
   HOME: 'https://mighty-cove-31255.herokuapp.com/api/user',
   USER_INFO: 'https://mighty-cove-31255.herokuapp.com/api/user/me',
   MESSAGES: 'https://mighty-cove-31255.herokuapp.com/api/messages',
-  WEB_SOCKET: `ws://mighty-cove-31255.herokuapp.com/websockets?${getCookie('token') ?? DEFAULT.TOKEN}`
+  WEB_SOCKET: `wss://mighty-cove-31255.herokuapp.com/websockets?${getCookie('token') ?? DEFAULT.TOKEN}`
 }
 
 const GLOBAL = {
