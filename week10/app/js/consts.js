@@ -20,7 +20,8 @@ const DEFAULT = {
   USER_NAME: 'oleg',
   EMAIL: 'olegkochiev19@gmail.com',
   CSS_CLASS_ACTIVE: '.active',
-  TOKEN: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9sZWdrb2NoaWV2MTlAZ21haWwuY29tIiwiaWF0IjoxNjUxNDE5NzMzLCJleHAiOjE2NTE4NjYxMzN9.4_l-oByAHwanI20DhkmakTXumHBiROSSsAWg_YGQDrw'
+  TOKEN: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9sZWdrb2NoaWV2MTlAZ21haWwuY29tIiwiaWF0IjoxNjUxNDE5NzMzLCJleHAiOjE2NTE4NjYxMzN9.4_l-oByAHwanI20DhkmakTXumHBiROSSsAWg_YGQDrw',
+  CHAT_WINDOW_HEIGHT: 435
 }
 
 const URLS = {
@@ -30,8 +31,13 @@ const URLS = {
   WEB_SOCKET: `ws://mighty-cove-31255.herokuapp.com/websockets?${getCookie('token') ?? DEFAULT.TOKEN}`
 }
 
+const GLOBAL = {
+  MESSAGES_HISTORY: []
+}
+
 export {
   UI_ELEMETS,
   URLS, 
-  DEFAULT
+  DEFAULT,
+  GLOBAL
 }

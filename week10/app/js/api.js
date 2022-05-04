@@ -1,6 +1,7 @@
 import {
   URLS,
-  UI_ELEMETS
+  UI_ELEMETS,
+  GLOBAL
 } from './consts.js';
 
 import {
@@ -57,7 +58,7 @@ const API = {
     }
   },
   
-  async getMessages() {
+  async getOldMessages() {
     try {
       const token = getCookie('token');
       let response = await fetch(URLS.MESSAGES, {
@@ -67,8 +68,14 @@ const API = {
           'Authorization': `Bearer ${token}`
         }
       });
-      let messages = await response.json();
-      return messages;
+      if(response.ok) {
+        const oldMessagesObject = await response.json();
+        const oldMessagesArray = oldMessagesObject.messages;
+        GLOBAL.MESSAGES_HISTORY.push(...oldMessagesArray);
+        console.log('История сообщений получена!');
+      } else {
+        console.log('Ошибка получения истории сообщений!!');
+      }
     } catch (error) {
       console.log(error);
     }

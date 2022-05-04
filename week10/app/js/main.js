@@ -99,3 +99,7 @@ UI_ELEMETS.INPUT_CHAT.addEventListener('keydown', (event) => {
   }
 })
 
+/* UI_ELEMETS.CHAT_WINDOW_SCROLL.addEventListener('scroll', () => {
+  console.log(UI_ELEMETS.CHAT_WINDOW_SCROLL.scrollTop);
+  console.log(UI_ELEMETS.CHAT_WINDOW_SCROLL.scrollHeight);
+}) */

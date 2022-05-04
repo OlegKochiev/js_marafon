@@ -6,15 +6,22 @@ import {
   render
 } from './render.js'
 
-
+import {
+  API
+} from './api.js'
 
  class SocketConnection {
   constructor(url) {
     this.socket = new WebSocket(url);
+    this._conditions();
+  }
 
-    this.socket.onopen = () => {
-      console.log("Подключение установлено!");
+  _conditions() {
+    this.socket.onopen = async () => {
+      console.log("Подключение к 'socket' установлено!");
       this._heartbeat(this);
+      await API.getOldMessages();
+      render.partMessagesHistory();
     }
 
     this.socket.onmessage = (event) => {
@@ -23,15 +30,15 @@ import {
     
     this.socket.onclose = (event) => {
       if (event.wasClean) {
-        alert('Соединение закрыто чисто');
+        console.log('Соединение закрыто чисто');
       } else {
-        alert('Обрыв соединения'); // например, "убит" процесс сервера
+        console.log('Обрыв соединения');
       }
       alert('Код: ' + event.code);
     }
     
     this.socket.onerror = (error) => {
-      alert("Ошибка " + error.message);
+      console.log("Ошибка " + error.message);
     }
   }
 
