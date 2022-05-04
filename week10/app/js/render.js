@@ -44,7 +44,7 @@ const render = {
   getMessageTemplate(datas) {
     const email = datas.user.email;
     const name = datas.user.name;
-    const text = datas.text/* .replaceAll('<', '').replaceAll('>','').replaceAll('(', '').replaceAll(')', '') */;
+    const text = datas.text.replaceAll('<', '').replaceAll('>','').replaceAll('(', '').replaceAll(')', '');
     const date = moment(datas.createdAt).format('LT') ;
     const isIAm = email === DEFAULT.EMAIL;
     let message = `
