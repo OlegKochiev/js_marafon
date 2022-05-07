@@ -1,4 +1,3 @@
-import { format, formatDistance, formatRelative, subDays } from 'date-fns'
 
 import {
   UI_ELEMETS,
@@ -48,7 +47,7 @@ const render = {
     const email = datas.user.email;
     const name = datas.user.name;
     const text = datas.text.replaceAll('<', '').replaceAll('>','').replaceAll('(', '').replaceAll(')', '');
-    const date = moment(datas.createdAt).format('LT') ;
+    const date = datas.createdAt;
     const isIAm = email === DEFAULT.EMAIL;
     let message = `
       <p class="chat__message float-${ isIAm ? 'right' : 'left' }">

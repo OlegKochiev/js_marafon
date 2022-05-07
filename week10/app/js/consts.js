@@ -13,7 +13,8 @@ const UI_ELEMETS = {
   MODAL_CONFIRM: document.querySelector('.modal-confirm'),
   MODAL_SETTINGS: document.querySelector('.modal-settings'),
   CHAT_WINDOW: document.querySelector('.chat__history-wrapper'),
-  CHAT_WINDOW_SCROLL: document.querySelector('.chat__history')
+  CHAT_WINDOW_SCROLL: document.querySelector('.chat__history'),
+  BTNS_CLOSE_MODAL: document.querySelectorAll('.modal__btn-close')
 }
 
 const DEFAULT = {
