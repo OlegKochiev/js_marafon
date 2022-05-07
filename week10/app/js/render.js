@@ -1,4 +1,4 @@
-import moment from './moment.js';
+import { format, formatDistance, formatRelative, subDays } from 'date-fns'
 
 import {
   UI_ELEMETS,
@@ -32,13 +32,16 @@ const render = {
   },
 
   showModal(modalWindow){
+    render.hideModal();
     modalWindow.classList.add('active');
   },
 
   hideModal() {
     const activeModal = document.querySelector('.active');
-    activeModal.querySelector('.form__input').value = '';
-    activeModal.classList.remove('active');
+    if (activeModal) {
+      activeModal.querySelector('.form__input').value = '';
+      activeModal.classList.remove('active');
+    }
   },
 
   getMessageTemplate(datas) {

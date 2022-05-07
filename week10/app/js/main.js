@@ -1,6 +1,6 @@
 import {
   UI_ELEMETS,
-  DEFAULT
+  KEYS
 } from './consts.js';
 
 import {
@@ -12,8 +12,8 @@ import {
 } from './api.js';
 
 import {
-  socketHeroku
-} from './socket.js'
+  UTILS
+} from './utils.js';
 
 UI_ELEMETS.BTN_QUIT.addEventListener('click', API.quitFromApplication);
 
@@ -25,83 +25,57 @@ document.querySelectorAll('.modal__btn-close').forEach((btnClose) => {
   btnClose.addEventListener('click', render.hideModal);
 });
 
-UI_ELEMETS.BTN_AUTH.addEventListener('click', async (event) => {
-  event.preventDefault();
-  if (!getCookie('token')) {
-    const email = UI_ELEMETS.INPUT_AUTH.value ?? DEFAULT.EMAIL;
-    await API.verifyEmail(email);
-    render.hideModal();
-    render.showModal(UI_ELEMETS.MODAL_CONFIRM);
-  } else {
-    render.hideModal()
+UI_ELEMETS.BTN_AUTH.addEventListener('click', (event) => {
+  UTILS.verifyEmail(event);
+})
+
+UI_ELEMETS.INPUT_AUTH.addEventListener('keydown', (event) => {
+  if (event.key === KEYS.ENTER) {
+    UTILS.verifyEmail(event);
   }
 })
 
-UI_ELEMETS.INPUT_AUTH.addEventListener('keydown', async (event) => {
-  if (event.key === "Enter") {
-    event.preventDefault();
-    if (!getCookie('token')) {
-      const email = UI_ELEMETS.INPUT_AUTH.value ?? defaultEmail;
-      await API.verifyEmail(email);
-      event.target.value = '';
-      render.hideModal();
-      render.showModal(UI_ELEMETS.MODAL_CONFIRM);
-    } else {
-      render.hideModal();
-    }
-  }
-})
-
-UI_ELEMETS.BTN_CONFIRM.addEventListener('click', async (event) => {
-  event.preventDefault();
-  const token = UI_ELEMETS.INPUT_CONFIRM.value;
-  setCookie('token', token);
-  render.hideModal();
+UI_ELEMETS.BTN_CONFIRM.addEventListener('click', (event) => {
+  UTILS.setCookie(event);
 });
 
 UI_ELEMETS.INPUT_CONFIRM.addEventListener('keydown', (event) => {
-  if (event.key === "Enter") {
-    event.preventDefault();
-    const token = UI_ELEMETS.INPUT_CONFIRM.value;
-    setCookie('token', token);
+  if (event.key === KEYS.ENTER) {
+    UTILS.setCookie(event);
   }
 })
 
 UI_ELEMETS.BTN_CHANGE_NAME.addEventListener('click', (event) => {
-  event.preventDefault();
-  const userName = UI_ELEMETS.INPUT_NAME.value ?? DEFAULT.USER_NAME;
-  API.changeUserName(userName);
-  render.hideModal();
+  UTILS.changeName(event);
 })
 
 UI_ELEMETS.INPUT_NAME.addEventListener('keydown', (event) => {
-  if (event.key === "Enter") {
-    event.preventDefault();
-    const userName = UI_ELEMETS.INPUT_NAME.value ?? DEFAULT.USER_NAME;
-    API.changeUserName(userName);
-    render.hideModal();
+  if (event.key === KEYS.ENTER) {
+    UTILS.changeName(event);
   }
 })
 
 UI_ELEMETS.BTN_SEND_MESSAGE.addEventListener('click', (event) => {
-  event.preventDefault();
-  const message = UI_ELEMETS.INPUT_CHAT.value;
-  socketHeroku.sendMessage(message);
-  UI_ELEMETS.INPUT_CHAT.value = '';
+  UTILS.sendMessage(event);
 })
 
 UI_ELEMETS.INPUT_CHAT.addEventListener('keydown', (event) => {
-  if (event.key === 'Enter') {
-    event.preventDefault();
-    const message = UI_ELEMETS.INPUT_CHAT.value;
-    socketHeroku.sendMessage(message);
-    UI_ELEMETS.INPUT_CHAT.value = '';
+  if (event.key === KEYS.ENTER) {
+    UTILS.sendMessage(event);
   }
 })
 
 UI_ELEMETS.CHAT_WINDOW_SCROLL.addEventListener('scroll', () => {
   const scrollTop = UI_ELEMETS.CHAT_WINDOW_SCROLL.scrollTop;
-  if(scrollTop === 0) {
+  if (scrollTop === 0) {
     render.partMessagesHistory();
   }
 });
+
+let token = getCookie('token');
+
+if(!token) {
+  render.showModal(UI_ELEMETS.MODAL_AUTH);
+} else {
+  UTILS.initialize();
+}

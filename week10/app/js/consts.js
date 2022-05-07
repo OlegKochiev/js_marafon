@@ -35,9 +35,14 @@ const GLOBAL = {
   MESSAGES_HISTORY: []
 }
 
+const KEYS = {
+  ENTER: 'Enter'
+}
+
 export {
   UI_ELEMETS,
   URLS, 
   DEFAULT,
-  GLOBAL
+  GLOBAL,
+  KEYS
 }

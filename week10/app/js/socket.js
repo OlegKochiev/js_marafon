@@ -1,8 +1,4 @@
 import {
-  URLS
-} from './consts.js'
-
-import {
   render
 } from './render.js'
 
@@ -59,8 +55,8 @@ import {
   }
 }
  
-const socketHeroku = new SocketConnection(URLS.WEB_SOCKET);
+
 
 export {
-  socketHeroku
+  SocketConnection
 }
